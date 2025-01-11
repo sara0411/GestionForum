@@ -1,0 +1,12 @@
+﻿<form method="get">
+    <input name="search" placeholder="Rechercher par compétence" />
+    <button type="submit">Rechercher</button>
+</form>
+
+@foreach (var candidat in Model)
+{
+    <div>
+        <p>@candidat.Nom @candidat.Prenom - @candidat.Competences</p>
+        <a asp-action="Evaluer" asp-route-id="@candidat.Id">Évaluer</a>
+    </div>
+}
