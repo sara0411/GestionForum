@@ -23,21 +23,34 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Candidats" asp-action="Create">Deposer CV</a>
+                            <a class="nav-link text-dark" asp-area="Candidate" asp-controller="Candidats" asp-action="Create">Deposer CV</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Candidats" asp-action="Index"> Candidats</a>
+                            <a class="nav-link text-dark" asp-area="Candidate" asp-controller="Candidats" asp-action="Index"> Candidats</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Recruteurs" asp-action="Index">Espace Recruteur</a>
+                            <a class="nav-link text-dark" asp-area="Recruiter" asp-controller="Recruteurs" asp-action="Index">Espace Recruteur</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Administrateurs" asp-action="Dashboard">Administration</a>
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Administrateurs" asp-action="Dashboard">Administration</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
+                    <div class="navbar-nav">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="nav-item">
+                                <button type="submit" class="btn btn-link nav-link">Déconnexion</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">Connexion</a>
+                            <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">Inscription</a>
+                        }
+                    </div>
                 </div>
             </div>
         </nav>

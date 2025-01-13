@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ForumRecrutementApp.Models.Candidat>
+
+<h2>Liste des Candidats</h2>
+
+<p>
+    <a asp-area="Candidate" asp-controller="Candidats" asp-action="Create" class="btn btn-primary">Créer un Candidat</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Email</th>
+            <th>Compétences</th>
+            <th>Forum</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Nom</td>
+                <td>@item.Prenom</td>
+                <td>@item.Email</td>
+                <td>@item.Competences</td>
+                <td>@(item.Forum?.Nom ?? "Non assigné")</td>
+                <td>
+                    <a asp-area="Candidate" asp-controller="Candidats" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Modifier</a>
+                    <a asp-area="Candidate" asp-controller="Candidats" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Supprimer</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

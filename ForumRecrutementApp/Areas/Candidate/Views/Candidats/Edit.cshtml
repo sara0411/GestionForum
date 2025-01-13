@@ -1,0 +1,40 @@
+﻿@model ForumRecrutementApp.Models.Candidat
+<form asp-action="Edit" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Nom"></label>
+        <input asp-for="Nom" class="form-control" />
+        <span asp-validation-for="Nom" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Prenom"></label>
+        <input asp-for="Prenom" class="form-control" />
+        <span asp-validation-for="Prenom" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" type="email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Competences">Compétences</label>
+        <input asp-for="Competences" class="form-control" />
+        <span asp-validation-for="Competences" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ForumId">Forum</label>
+        <select asp-for="ForumId" asp-items="ViewBag.Forums" class="form-control"></select>
+        <span asp-validation-for="ForumId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CVFile">CV (Upload)</label>
+        <input asp-for="CVFile" type="file" class="form-control" />
+        <span asp-validation-for="CVFile" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>

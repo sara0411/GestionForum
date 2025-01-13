@@ -1,0 +1,47 @@
+﻿@model ForumRecrutementApp.Models.Forum
+@{
+    ViewData["Title"] = "Modifier le Forum";
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid">
+    <h1 class="h3 mb-4">Modifier le forum</h1>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <form asp-action="Edit">
+                <input type="hidden" asp-for="Id" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Nom" class="control-label">Nom du forum</label>
+                    <input asp-for="Nom" class="form-control" />
+                    <span asp-validation-for="Nom" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Date" class="control-label">Date</label>
+                    <input asp-for="Date" class="form-control" type="date" />
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Lieu" class="control-label">Lieu</label>
+                    <input asp-for="Lieu" class="form-control" />
+                    <span asp-validation-for="Lieu" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Enregistrer" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-secondary">Retour à la liste</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

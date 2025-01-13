@@ -17,12 +17,12 @@ namespace ForumRecrutementApp.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("ProductVersion", "8.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Administrateur", b =>
+            modelBuilder.Entity("ForumRecrutementApp.Models.Administrateur", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -41,76 +41,6 @@ namespace ForumRecrutementApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Administrateurs");
-                });
-
-            modelBuilder.Entity("Evaluation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CandidatId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Commentaire")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Note")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RecruteurId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CandidatId");
-
-                    b.HasIndex("RecruteurId");
-
-                    b.ToTable("Evaluations");
-                });
-
-            modelBuilder.Entity("Forum", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Nom")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Forums");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nom = "Forum 1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nom = "Forum 2"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nom = "Forum 3"
-                        });
                 });
 
             modelBuilder.Entity("ForumRecrutementApp.Models.Candidat", b =>
@@ -171,6 +101,102 @@ namespace ForumRecrutementApp.Migrations
                             Nom = "Smith",
                             Prenom = "Jane"
                         });
+                });
+
+            modelBuilder.Entity("ForumRecrutementApp.Models.Evaluation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CandidatId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Commentaire")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Note")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RecruteurId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CandidatId");
+
+                    b.HasIndex("RecruteurId");
+
+                    b.ToTable("Evaluations");
+                });
+
+            modelBuilder.Entity("ForumRecrutementApp.Models.Forum", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Forums");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nom = "Forum 1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nom = "Forum 2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nom = "Forum 3"
+                        });
+                });
+
+            modelBuilder.Entity("ForumRecrutementApp.Models.Recruteur", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Entreprise")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ForumId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ForumId");
+
+                    b.ToTable("Recruteurs");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -371,33 +397,16 @@ namespace ForumRecrutementApp.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Recruteur", b =>
+            modelBuilder.Entity("ForumRecrutementApp.Models.Candidat", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.HasOne("ForumRecrutementApp.Models.Forum", "Forum")
+                        .WithMany("Candidats")
+                        .HasForeignKey("ForumId");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Entreprise")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ForumId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nom")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ForumId");
-
-                    b.ToTable("Recruteurs");
+                    b.Navigation("Forum");
                 });
 
-            modelBuilder.Entity("Evaluation", b =>
+            modelBuilder.Entity("ForumRecrutementApp.Models.Evaluation", b =>
                 {
                     b.HasOne("ForumRecrutementApp.Models.Candidat", "Candidat")
                         .WithMany()
@@ -405,7 +414,7 @@ namespace ForumRecrutementApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Recruteur", "Recruteur")
+                    b.HasOne("ForumRecrutementApp.Models.Recruteur", "Recruteur")
                         .WithMany()
                         .HasForeignKey("RecruteurId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -416,10 +425,10 @@ namespace ForumRecrutementApp.Migrations
                     b.Navigation("Recruteur");
                 });
 
-            modelBuilder.Entity("ForumRecrutementApp.Models.Candidat", b =>
+            modelBuilder.Entity("ForumRecrutementApp.Models.Recruteur", b =>
                 {
-                    b.HasOne("Forum", "Forum")
-                        .WithMany("Candidats")
+                    b.HasOne("ForumRecrutementApp.Models.Forum", "Forum")
+                        .WithMany("Recruteurs")
                         .HasForeignKey("ForumId");
 
                     b.Navigation("Forum");
@@ -476,16 +485,7 @@ namespace ForumRecrutementApp.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Recruteur", b =>
-                {
-                    b.HasOne("Forum", "Forum")
-                        .WithMany("Recruteurs")
-                        .HasForeignKey("ForumId");
-
-                    b.Navigation("Forum");
-                });
-
-            modelBuilder.Entity("Forum", b =>
+            modelBuilder.Entity("ForumRecrutementApp.Models.Forum", b =>
                 {
                     b.Navigation("Candidats");
 

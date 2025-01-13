@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
+﻿using ForumRecrutementApp.Models;
+using System.ComponentModel.DataAnnotations;
+namespace ForumRecrutementApp.Models
+{
 public class Recruteur
 {
     [Key]
@@ -11,4 +13,6 @@ public class Recruteur
     public string Entreprise { get; set; }
     public int? ForumId { get; set; }
     public Forum Forum { get; set; }
+}
+
 }

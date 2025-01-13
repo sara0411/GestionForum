@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hp\\source\\repos\\ForumRecrutementApp\\ForumRecrutementApp.csproj": {}
+    "C:\\Users\\hp\\source\\repos\\GestionForum\\ForumRecrutementApp\\ForumRecrutementApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hp\\source\\repos\\ForumRecrutementApp\\ForumRecrutementApp.csproj": {
+    "C:\\Users\\hp\\source\\repos\\GestionForum\\ForumRecrutementApp\\ForumRecrutementApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hp\\source\\repos\\ForumRecrutementApp\\ForumRecrutementApp.csproj",
+        "projectUniqueName": "C:\\Users\\hp\\source\\repos\\GestionForum\\ForumRecrutementApp\\ForumRecrutementApp.csproj",
         "projectName": "ForumRecrutementApp",
-        "projectPath": "C:\\Users\\hp\\source\\repos\\ForumRecrutementApp\\ForumRecrutementApp.csproj",
+        "projectPath": "C:\\Users\\hp\\source\\repos\\GestionForum\\ForumRecrutementApp\\ForumRecrutementApp.csproj",
         "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hp\\source\\repos\\ForumRecrutementApp\\obj\\",
+        "outputPath": "C:\\Users\\hp\\source\\repos\\GestionForum\\ForumRecrutementApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -46,33 +46,27 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[8.0.0, )"
-            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[8.0.11, )"
             },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[8.0.0, )"
-            },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
+            "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
               "version": "[8.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[8.0.11, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[8.0.11, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[8.0.7, )"
             }
           },
           "imports": [

@@ -1,21 +1,24 @@
 ﻿using ForumRecrutementApp.Models;
 using System.ComponentModel.DataAnnotations;
-
-public class Evaluation
+namespace ForumRecrutementApp.Models
 {
-    [Key]
-    public int Id { get; set; }
 
-    [Required]
-    public int CandidatId { get; set; }
-    public Candidat Candidat { get; set; }
+    public class Evaluation
+    {
+        [Key]
+        public int Id { get; set; }
 
-    [Required]
-    public int RecruteurId { get; set; }
-    public Recruteur Recruteur { get; set; }
+        [Required]
+        public int CandidatId { get; set; }
+        public Candidat Candidat { get; set; }
 
-    [Range(1, 5)]
-    public int Note { get; set; }
+        [Required]
+        public int RecruteurId { get; set; }
+        public Recruteur Recruteur { get; set; }
 
-    public string Commentaire { get; set; }
+        [Range(1, 5)]
+        public int Note { get; set; }
+
+        public string Commentaire { get; set; }
+    }
 }
