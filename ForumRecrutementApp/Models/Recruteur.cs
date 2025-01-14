@@ -1,4 +1,5 @@
 ﻿using ForumRecrutementApp.Models;
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 namespace ForumRecrutementApp.Models
 {
@@ -10,7 +11,11 @@ public class Recruteur
     [Required]
     public string Nom { get; set; }
     [Required]
-    public string Entreprise { get; set; }
+    public string Email { get; set; }
+    [Required]
+        public string? IdentityUserId { get; set; }  
+        public IdentityUser? IdentityUser { get; set; }  
+   // public string Entreprise { get; set; }
     public int? ForumId { get; set; }
     public Forum Forum { get; set; }
 }

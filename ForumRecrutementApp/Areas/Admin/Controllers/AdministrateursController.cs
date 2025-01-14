@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-//Authorize(Roles = "Admin")]
-    [Area("Admin")]
+[Area("Admin")]
+[Authorize(Roles = "Admin")]
 
     public class AdministrateursController : Controller
-    {
+{
         private readonly ApplicationDbContext _context;
 
         public AdministrateursController(ApplicationDbContext context)

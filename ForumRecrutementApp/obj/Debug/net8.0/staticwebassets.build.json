@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "/+Q/sMg7YdIqWzoVHHY5/P6ALqIhWkMLgnpDfrv//j8=",
+  "Hash": "yFX4UXMHIjvBj0M3k99pSlGCr9WWSVbc1ZqINXJGQCc=",
   "Source": "ForumRecrutementApp",
   "BasePath": "_content/ForumRecrutementApp",
   "Mode": "Default",
@@ -2523,6 +2523,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\Test_20250111160238.pdf"
+    },
+    {
+      "Identity": "C:\\Users\\hp\\source\\repos\\GestionForum\\ForumRecrutementApp\\wwwroot\\uploads\\Test_20250113213721.pdf",
+      "SourceId": "ForumRecrutementApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\hp\\source\\repos\\GestionForum\\ForumRecrutementApp\\wwwroot\\",
+      "BasePath": "_content/ForumRecrutementApp",
+      "RelativePath": "uploads/Test_20250113213721.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\Test_20250113213721.pdf"
     },
     {
       "Identity": "C:\\Users\\hp\\source\\repos\\GestionForum\\ForumRecrutementApp\\wwwroot\\uploads\\ZxG poster TV.png.pdf",

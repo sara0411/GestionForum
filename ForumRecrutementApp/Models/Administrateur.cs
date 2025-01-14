@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 namespace ForumRecrutementApp.Models
 {
 
@@ -10,5 +11,7 @@ namespace ForumRecrutementApp.Models
         public string Nom { get; set; }
         [Required]
         public string Email { get; set; }
+        public string? IdentityUserId { get; set; }  
+        public IdentityUser? IdentityUser { get; set; }
     }
 }

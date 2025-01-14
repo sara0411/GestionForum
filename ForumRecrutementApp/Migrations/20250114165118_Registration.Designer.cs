@@ -4,6 +4,7 @@ using ForumRecrutementApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ForumRecrutementApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250114165118_Registration")]
+    partial class Registration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +51,6 @@ namespace ForumRecrutementApp.Migrations
                         .HasFilter("[IdentityUserId] IS NOT NULL");
 
                     b.ToTable("Administrateurs");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Email = "admin@forum.com",
-                            IdentityUserId = "4",
-                            Nom = "Admin"
-                        });
                 });
 
             modelBuilder.Entity("ForumRecrutementApp.Models.Candidat", b =>
@@ -147,24 +141,6 @@ namespace ForumRecrutementApp.Migrations
                     b.HasIndex("RecruteurId");
 
                     b.ToTable("Evaluations");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CandidatId = 1,
-                            Commentaire = "Excellent profil technique, bonne communication",
-                            Note = 4,
-                            RecruteurId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CandidatId = 2,
-                            Commentaire = "Profil très prometteur, expertise Java impressionnante",
-                            Note = 5,
-                            RecruteurId = 1
-                        });
                 });
 
             modelBuilder.Entity("ForumRecrutementApp.Models.Forum", b =>
@@ -190,20 +166,20 @@ namespace ForumRecrutementApp.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2025, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nom = "Forum Tech 2025"
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nom = "Forum 1"
                         },
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2025, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nom = "Forum Digital Innovation"
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nom = "Forum 2"
                         },
                         new
                         {
                             Id = 3,
-                            Date = new DateTime(2025, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nom = "Forum Startup"
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nom = "Forum 3"
                         });
                 });
 
@@ -216,6 +192,10 @@ namespace ForumRecrutementApp.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Entreprise")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -238,16 +218,6 @@ namespace ForumRecrutementApp.Migrations
                         .IsUnique();
 
                     b.ToTable("Recruteurs");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Email = "recruiter1@company.com",
-                            ForumId = 1,
-                            IdentityUserId = "3",
-                            Nom = "Martin"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

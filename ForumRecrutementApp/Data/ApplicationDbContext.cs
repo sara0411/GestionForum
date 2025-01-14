@@ -40,13 +40,81 @@ namespace ForumRecrutementApp.Data
                 .HasOne(e => e.Recruteur)
                 .WithMany()
                 .HasForeignKey(e => e.RecruteurId);
+            modelBuilder.Entity<Recruteur>()
+          .HasOne(r => r.IdentityUser)
+          .WithOne()
+          .HasForeignKey<Recruteur>(r => r.IdentityUserId);
 
+            modelBuilder.Entity<Administrateur>()
+                .HasOne(a => a.IdentityUser)
+                .WithOne()
+                .HasForeignKey<Administrateur>(a => a.IdentityUserId);
+          /*  var hasher = new PasswordHasher<IdentityUser>();
 
+            modelBuilder.Entity<IdentityUser>().HasData(
+                new IdentityUser
+                {
+                    Id = "1",
+                    UserName = "john.doe@example.com",
+                    NormalizedUserName = "JOHN.DOE@EXAMPLE.COM",
+                    Email = "john.doe@example.com",
+                    NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
+                    EmailConfirmed = true,
+                    PasswordHash = hasher.HashPassword(null, "Password123!")
+                },
+                new IdentityUser
+                {
+                    Id = "2",
+                    UserName = "jane.smith@example.com",
+                    NormalizedUserName = "JANE.SMITH@EXAMPLE.COM",
+                    Email = "jane.smith@example.com",
+                    NormalizedEmail = "JANE.SMITH@EXAMPLE.COM",
+                    EmailConfirmed = true,
+                    PasswordHash = hasher.HashPassword(null, "Password123!")
+                },
+                new IdentityUser
+                {
+                    Id = "3",
+                    UserName = "recruiter1@company.com",
+                    NormalizedUserName = "RECRUITER1@COMPANY.COM",
+                    Email = "recruiter1@company.com",
+                    NormalizedEmail = "RECRUITER1@COMPANY.COM",
+                    EmailConfirmed = true,
+                    PasswordHash = hasher.HashPassword(null, "Password123!")
+                },
+                new IdentityUser
+                {
+                    Id = "4",
+                    UserName = "admin@forum.com",
+                    NormalizedUserName = "ADMIN@FORUM.COM",
+                    Email = "admin@forum.com",
+                    NormalizedEmail = "ADMIN@FORUM.COM",
+                    EmailConfirmed = true,
+                    PasswordHash = hasher.HashPassword(null, "Password123!")
+                }
+            );
+*/
+            // Seed Forums
             modelBuilder.Entity<Forum>().HasData(
-       new Forum { Id = 1, Nom = "Forum 1" },
-       new Forum { Id = 2, Nom = "Forum 2" },
-       new Forum { Id = 3, Nom = "Forum 3" });
-
+                new Forum
+                {
+                    Id = 1,
+                    Nom = "Forum Tech 2025",
+                    Date = new DateTime(2025, 3, 15)
+                },
+                new Forum
+                {
+                    Id = 2,
+                    Nom = "Forum Digital Innovation",
+                    Date = new DateTime(2025, 4, 20)
+                },
+                new Forum
+                {
+                    Id = 3,
+                    Nom = "Forum Startup",
+                    Date = new DateTime(2025, 5, 10),
+                }
+            );
 
             // Seed Candidats
             modelBuilder.Entity<Candidat>().HasData(
@@ -70,8 +138,50 @@ namespace ForumRecrutementApp.Data
                     CV = "jane_smith_cv.pdf",
                     ForumId = 2
                 }
+            );
 
-                );
+            // Seed Recruteurs
+            modelBuilder.Entity<Recruteur>().HasData(
+                new Recruteur
+                {
+                    Id = 1,
+                    IdentityUserId = "3",
+                    Nom = "Martin",
+                    Email = "recruiter1@company.com",
+                    ForumId = 1
+                }
+            );
+
+            // Seed Administrateurs
+            modelBuilder.Entity<Administrateur>().HasData(
+                new Administrateur
+                {
+                    Id = 1,
+                    IdentityUserId = "4",
+                    Nom = "Admin",
+                    Email = "admin@forum.com",
+                }
+            );
+
+            // Seed Evaluations
+            modelBuilder.Entity<Evaluation>().HasData(
+                new Evaluation
+                {
+                    Id = 1,
+                    CandidatId = 1,
+                    RecruteurId = 1,
+                    Note = 4,
+                    Commentaire = "Excellent profil technique, bonne communication",
+                },
+                new Evaluation
+                {
+                    Id = 2,
+                    CandidatId = 2,
+                    RecruteurId = 1,
+                    Note = 5,
+                    Commentaire = "Profil très prometteur, expertise Java impressionnante",
+                }
+            );
         }
 
     }

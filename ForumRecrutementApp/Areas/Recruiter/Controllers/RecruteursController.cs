@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 [Area("Recruiter")]
-//[Authorize(Roles = "Recruiter")]
+[Authorize(Roles = "Recruteur")]
 public class RecruteursController : Controller
 {
     private readonly ApplicationDbContext _context;
