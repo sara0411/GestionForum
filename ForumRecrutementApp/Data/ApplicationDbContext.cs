@@ -146,6 +146,7 @@ namespace ForumRecrutementApp.Data
                 {
                     Id = 1,
                     IdentityUserId = "3",
+                    Entreprise = "Company 1",
                     Nom = "Martin",
                     Email = "recruiter1@company.com",
                     ForumId = 1

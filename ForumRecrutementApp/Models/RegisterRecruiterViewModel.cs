@@ -5,6 +5,12 @@ namespace ForumRecrutementApp.Models
     public class RegisterRecruiterViewModel
     {
         [Required(ErrorMessage = "L'email est requis")]
+        public string Nom { get; set; }
+
+        [Required(ErrorMessage = "Le nom de l'entreprise est requis")]
+        public string Entreprise { get; set; }
+
+        [Required(ErrorMessage = "L'email est requis")]
         [EmailAddress(ErrorMessage = "Format d'email invalide")]
         public string Email { get; set; }
 

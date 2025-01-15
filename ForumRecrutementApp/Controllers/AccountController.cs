@@ -78,15 +78,17 @@ namespace ForumRecrutementApp.Controllers
 
                     var recruteur = new Recruteur
                     {
+                        Nom = model.Nom,
+                        Entreprise = model.Entreprise,
                         Email = model.Email,
-                        IdentityUserId = user.Id  // Use IdentityUserId instead of UserId
+                        IdentityUserId = user.Id  
                     };
 
                     _context.Recruteurs.Add(recruteur);
                     await _context.SaveChangesAsync();
 
                     await _signInManager.SignInAsync(user, false);
-                    return RedirectToAction("Index", "Recruiter");
+                    return RedirectToAction("Index", "Recruteur");
                 }
 
                 foreach (var error in result.Errors)
@@ -112,7 +114,7 @@ namespace ForumRecrutementApp.Controllers
                     var admin = new Administrateur
                     {
                         Email = model.Email,
-                        IdentityUserId = user.Id  // Use IdentityUserId instead of UserId
+                        IdentityUserId = user.Id 
                     };
 
                     _context.Administrateurs.Add(admin);

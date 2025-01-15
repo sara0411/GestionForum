@@ -14,6 +14,18 @@
                     <form asp-action="RegisterRecruiter" asp-controller="Account" method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+                        <div class="form-group">
+                            <label asp-for="Nom" class="form-label">Nom</label>
+                            <input asp-for="Nom" class="form-control" placeholder="Entrez votre Nom" />
+                            <span asp-validation-for="Nom" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Entreprise" class="form-label">Entreprise</label>
+                            <input asp-for="Entreprise" class="form-control" placeholder="Entrez votre Entreprise" />
+                            <span asp-validation-for="Entreprise" class="text-danger"></span>
+                        </div>
+
                         <div class="form-group mb-3">
                             <label asp-for="Email" class="form-label">Email</label>
                             <input asp-for="Email" class="form-control" placeholder="Entrez votre email" />
