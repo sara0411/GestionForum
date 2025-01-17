@@ -20,7 +20,6 @@ public class CandidatsController : Controller
         _context = context;
     }
 
-    // GET: Candidats/Index
     public async Task<IActionResult> Index()
     {
         Console.WriteLine("Index: Fetching list of candidats");
@@ -29,7 +28,6 @@ public class CandidatsController : Controller
         return View(candidats);
     }
 
-    // GET: Candidats/Create
     public IActionResult Create()
     {
         Console.WriteLine("Create GET: Preparing form");
@@ -44,7 +42,6 @@ public class CandidatsController : Controller
         return View();
     }
 
-    // POST: Candidats/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Candidat candidat)
@@ -52,12 +49,10 @@ public class CandidatsController : Controller
         Console.WriteLine("Create POST: Form submitted");
         Console.WriteLine($"Create POST: Received ForumId value: {candidat.ForumId}");
 
-        // Clear any existing model errors for these fields
         ModelState.Remove("CV");
         ModelState.Remove("Forum");
         ModelState.Remove("ForumId");
 
-        // Process CV file
         if (candidat.CVFile != null && candidat.CVFile.Length > 0)
         {
             Console.WriteLine("Create POST: CV file uploaded");
@@ -89,14 +84,12 @@ public class CandidatsController : Controller
             ModelState.AddModelError("CVFile", "Please upload a CV file.");
         }
 
-        // Validate Forum selection
         if (candidat.ForumId.HasValue && candidat.ForumId > 0)
         {
             var forum = await _context.Forums.FindAsync(candidat.ForumId);
             if (forum != null)
             {
                 Console.WriteLine($"Create POST: Found valid forum: {forum.Nom}");
-                // Don't set candidat.Forum here as it may cause tracking issues
             }
             else
             {
@@ -128,7 +121,6 @@ public class CandidatsController : Controller
 
         try
         {
-            // Only add the Candidat without trying to attach the Forum
             _context.Candidats.Add(candidat);
             await _context.SaveChangesAsync();
             Console.WriteLine("Create POST: Candidat saved successfully");
@@ -143,9 +135,6 @@ public class CandidatsController : Controller
         }
     }
 
-    // GET: Candidats/Edit/5
-    
-    // GET: Candidats/Edit/5
     public async Task<IActionResult> Edit(int? id)
     {
         Console.WriteLine($"Edit GET: Called with id = {id}");

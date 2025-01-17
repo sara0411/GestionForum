@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ForumRecrutementApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+018375d5f82c9d91f991e3a7679bc955e09cd5a8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7490e17f8a43acd55e309f4878315c19dd4331b9")]
 [assembly: System.Reflection.AssemblyProductAttribute("ForumRecrutementApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ForumRecrutementApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

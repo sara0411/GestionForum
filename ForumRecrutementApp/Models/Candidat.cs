@@ -26,7 +26,6 @@ namespace ForumRecrutementApp.Models
 
         public string CV { get; set; }
 
-        // Remove Required attribute from here if it exists
         public int? ForumId { get; set; }
 
         public Forum Forum { get; set; }
