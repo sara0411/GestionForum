@@ -43,4 +43,9 @@ public class RecruteursController : Controller
         await _context.SaveChangesAsync();
         return RedirectToAction("Index");
     }
+    [HttpGet]
+    public IActionResult Dashboard()
+        {
+            return View();
+        }
 }

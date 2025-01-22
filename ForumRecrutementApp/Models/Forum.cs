@@ -11,6 +11,9 @@ namespace ForumRecrutementApp.Models
         [Required]
         public string Nom { get; set; }
 
+      /*  [Required]
+        public string Entreprise { get; set; }
+*/
         public DateTime Date { get; set; }
         public ICollection<Recruteur> Recruteurs { get; set; }
         public ICollection<Candidat> Candidats { get; set; }

@@ -37,15 +37,18 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="Recruiter" asp-controller="Recruteurs" asp-action="Index">Espace Recruteur</a>
                                 </li>
+                                 <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Candidate" asp-controller="Candidats" asp-action="Index">Candidats</a>
+                            </li>
+                             <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Recruiter" asp-controller="Recruteurs" asp-action="Dashboard"> Evaluer</a>
+                                </li>
                             }
                         }
                         else
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="Candidate" asp-controller="Candidats" asp-action="Create">Déposer CV</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Candidate" asp-controller="Candidats" asp-action="Index">Candidats</a>
                             </li>
                         }
                     </ul>

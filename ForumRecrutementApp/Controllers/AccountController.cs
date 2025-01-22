@@ -10,13 +10,13 @@ namespace ForumRecrutementApp.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly ApplicationDbContext _context; // Add this
+        private readonly ApplicationDbContext _context;
 
 
         public AccountController(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-                    ApplicationDbContext context) // Add context parameter
+                    ApplicationDbContext context) 
 
         {
             _context = context;
@@ -44,10 +44,10 @@ namespace ForumRecrutementApp.Controllers
 
                     if (await _userManager.IsInRoleAsync(user, "Admin"))
                         return RedirectToAction("Dashboard", "Administrateurs");
-                    else if (await _userManager.IsInRoleAsync(user, "Recruteur"))
-                        return RedirectToAction("Index", "Recruiter");
+                    else if (await _userManager.IsInRoleAsync(user, "Recruteurs"))
+                        return RedirectToAction("Index", "Recruteurs");
 
-                   // return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError("", "Tentative de connexion invalide");
             }
@@ -74,7 +74,7 @@ namespace ForumRecrutementApp.Controllers
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "Recruteur");
+                    await _userManager.AddToRoleAsync(user, "Recruteurs");
 
                     var recruteur = new Recruteur
                     {
@@ -88,7 +88,7 @@ namespace ForumRecrutementApp.Controllers
                     await _context.SaveChangesAsync();
 
                     await _signInManager.SignInAsync(user, false);
-                    return RedirectToAction("Index", "Recruteur");
+                    return RedirectToAction("Index", "Recruteurs");
                 }
 
                 foreach (var error in result.Errors)
@@ -131,7 +131,6 @@ namespace ForumRecrutementApp.Controllers
             }
             return View(model);
         }
-        [HttpGet]
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
