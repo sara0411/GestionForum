@@ -34,12 +34,15 @@ public class CandidatsController : Controller
         if (forums == null || !forums.Any())
         {
             Console.WriteLine("Create GET: No forums found");
-            throw new Exception("No forums found. Please ensure the Forums table is populated.");
+            // Handle the case more gracefully, e.g., by showing a message to the user
+            ViewBag.ErrorMessage = "No forums found. Please ensure the Forums table is populated.";
+            return View("Error");
         }
 
         ViewBag.Forums = new SelectList(forums, "Id", "Nom");
         return View();
     }
+
 
     [HttpPost]
     [ValidateAntiForgeryToken]

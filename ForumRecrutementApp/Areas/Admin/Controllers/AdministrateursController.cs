@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-[Area("Admin")]
-[Authorize(Roles = "Admin")]
+namespace ForumRecrutementApp.Areas.Admin.Controllers
+{
+    [Area("Admin")]
+    [Authorize(Roles = "Admin")]
 
     public class AdministrateursController : Controller
-{
+    {
         private readonly ApplicationDbContext _context;
 
         public AdministrateursController(ApplicationDbContext context)
@@ -25,3 +27,4 @@ using Microsoft.EntityFrameworkCore;
             return View(dashboard);
         }
     }
+}

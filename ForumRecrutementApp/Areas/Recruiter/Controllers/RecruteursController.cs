@@ -3,7 +3,8 @@ using ForumRecrutementApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
+namespace ForumRecrutementApp.Areas.Recruiter.Controllers
+{ 
 [Area("Recruiter")]
 [Authorize(Roles = "Recruteur")]
 public class RecruteursController : Controller
@@ -45,7 +46,8 @@ public class RecruteursController : Controller
     }
     [HttpGet]
     public IActionResult Dashboard()
-        {
-            return View();
-        }
+    {
+        return View();
+    }
+}
 }
