@@ -48,15 +48,6 @@ namespace ForumRecrutementApp.Migrations
                         .HasFilter("[IdentityUserId] IS NOT NULL");
 
                     b.ToTable("Administrateurs");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Email = "admin@forum.com",
-                            IdentityUserId = "4",
-                            Nom = "Admin"
-                        });
                 });
 
             modelBuilder.Entity("ForumRecrutementApp.Models.Candidat", b =>
@@ -68,6 +59,18 @@ namespace ForumRecrutementApp.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CV")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CVContentType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("CVData")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("CVFileName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -95,28 +98,6 @@ namespace ForumRecrutementApp.Migrations
                     b.HasIndex("ForumId");
 
                     b.ToTable("Candidats");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CV = "john_doe_cv.pdf",
-                            Competences = "C#, .NET, SQL",
-                            Email = "john.doe@example.com",
-                            ForumId = 1,
-                            Nom = "Doe",
-                            Prenom = "John"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CV = "jane_smith_cv.pdf",
-                            Competences = "Java, Spring Boot, Hibernate",
-                            Email = "jane.smith@example.com",
-                            ForumId = 2,
-                            Nom = "Smith",
-                            Prenom = "Jane"
-                        });
                 });
 
             modelBuilder.Entity("ForumRecrutementApp.Models.Evaluation", b =>
@@ -147,24 +128,6 @@ namespace ForumRecrutementApp.Migrations
                     b.HasIndex("RecruteurId");
 
                     b.ToTable("Evaluations");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CandidatId = 1,
-                            Commentaire = "Excellent profil technique, bonne communication",
-                            Note = 4,
-                            RecruteurId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CandidatId = 2,
-                            Commentaire = "Profil très prometteur, expertise Java impressionnante",
-                            Note = 5,
-                            RecruteurId = 1
-                        });
                 });
 
             modelBuilder.Entity("ForumRecrutementApp.Models.Forum", b =>
@@ -185,26 +148,6 @@ namespace ForumRecrutementApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Forums");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Date = new DateTime(2025, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nom = "Forum Tech 2025"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Date = new DateTime(2025, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nom = "Forum Digital Innovation"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Date = new DateTime(2025, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nom = "Forum Startup"
-                        });
                 });
 
             modelBuilder.Entity("ForumRecrutementApp.Models.Recruteur", b =>
@@ -242,17 +185,6 @@ namespace ForumRecrutementApp.Migrations
                         .IsUnique();
 
                     b.ToTable("Recruteurs");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Email = "recruiter1@company.com",
-                            Entreprise = "Company 1",
-                            ForumId = 1,
-                            IdentityUserId = "3",
-                            Nom = "Martin"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

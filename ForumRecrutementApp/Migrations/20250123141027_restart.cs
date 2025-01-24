@@ -3,30 +3,14 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace ForumRecrutementApp.Migrations
 {
     /// <inheritdoc />
-    public partial class testing : Migration
+    public partial class restart : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Administrateurs",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nom = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Administrateurs", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -99,6 +83,26 @@ namespace ForumRecrutementApp.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Administrateurs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nom = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdentityUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Administrateurs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Administrateurs_AspNetUsers_IdentityUserId",
+                        column: x => x.IdentityUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -197,7 +201,10 @@ namespace ForumRecrutementApp.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Competences = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CV = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ForumId = table.Column<int>(type: "int", nullable: false)
+                    CVData = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    CVFileName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CVContentType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ForumId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -206,8 +213,7 @@ namespace ForumRecrutementApp.Migrations
                         name: "FK_Candidats_Forums_ForumId",
                         column: x => x.ForumId,
                         principalTable: "Forums",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -217,12 +223,20 @@ namespace ForumRecrutementApp.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nom = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdentityUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Entreprise = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ForumId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Recruteurs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Recruteurs_AspNetUsers_IdentityUserId",
+                        column: x => x.IdentityUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Recruteurs_Forums_ForumId",
                         column: x => x.ForumId,
@@ -258,24 +272,12 @@ namespace ForumRecrutementApp.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "Forums",
-                columns: new[] { "Id", "Date", "Nom" },
-                values: new object[,]
-                {
-                    { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Forum 1" },
-                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Forum 2" },
-                    { 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Forum 3" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Candidats",
-                columns: new[] { "Id", "CV", "Competences", "Email", "ForumId", "Nom", "Prenom" },
-                values: new object[,]
-                {
-                    { 1, "john_doe_cv.pdf", "C#, .NET, SQL", "john.doe@example.com", 1, "Doe", "John" },
-                    { 2, "jane_smith_cv.pdf", "Java, Spring Boot, Hibernate", "jane.smith@example.com", 2, "Smith", "Jane" }
-                });
+            migrationBuilder.CreateIndex(
+                name: "IX_Administrateurs_IdentityUserId",
+                table: "Administrateurs",
+                column: "IdentityUserId",
+                unique: true,
+                filter: "[IdentityUserId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -335,6 +337,12 @@ namespace ForumRecrutementApp.Migrations
                 name: "IX_Recruteurs_ForumId",
                 table: "Recruteurs",
                 column: "ForumId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Recruteurs_IdentityUserId",
+                table: "Recruteurs",
+                column: "IdentityUserId",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -365,13 +373,13 @@ namespace ForumRecrutementApp.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Candidats");
 
             migrationBuilder.DropTable(
                 name: "Recruteurs");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Forums");

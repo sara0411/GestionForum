@@ -21,11 +21,14 @@ namespace ForumRecrutementApp.Models
         [Required(ErrorMessage = "Les compétences sont requises")]
         public string Competences { get; set; }
 
-        [NotMapped]
-        public IFormFile CVFile { get; set; }
-
         public string CV { get; set; }
 
+        public byte[] CVData { get; set; }
+        public string CVFileName { get; set; }
+        public string CVContentType { get; set; }
+
+        [NotMapped]
+        public IFormFile CVFile { get; set; }
         public int? ForumId { get; set; }
 
         public Forum Forum { get; set; }

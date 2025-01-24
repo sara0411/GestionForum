@@ -44,7 +44,7 @@ namespace ForumRecrutementApp.Controllers
 
                     if (await _userManager.IsInRoleAsync(user, "Admin"))
                         return RedirectToAction("Dashboard", "Administrateurs");
-                    else if (await _userManager.IsInRoleAsync(user, "Recruteurs"))
+                    else if (await _userManager.IsInRoleAsync(user, "Recruteur"))
                         return RedirectToAction("Index", "Recruteurs");
 
                     return RedirectToAction("Index", "Home");
@@ -74,7 +74,7 @@ namespace ForumRecrutementApp.Controllers
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "Recruteurs");
+                    await _userManager.AddToRoleAsync(user, "Recruteur");
 
                     var recruteur = new Recruteur
                     {
