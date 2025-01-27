@@ -3,16 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{29CC071E-FEC0-4556-B36E-33FCF00F7C91}|ForumRecrutementApp.csproj|c:\\users\\hajar\\source\\repos\\gestionforum\\forumrecrutementapp\\areas\\recruiter\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29CC071E-FEC0-4556-B36E-33FCF00F7C91}|ForumRecrutementApp.csproj|solutionrelative:areas\\recruiter\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{29CC071E-FEC0-4556-B36E-33FCF00F7C91}|ForumRecrutementApp.csproj|c:\\users\\hajar\\source\\repos\\gestionforum\\forumrecrutementapp\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{29CC071E-FEC0-4556-B36E-33FCF00F7C91}|ForumRecrutementApp.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{29CC071E-FEC0-4556-B36E-33FCF00F7C91}|ForumRecrutementApp.csproj|c:\\users\\hajar\\source\\repos\\gestionforum\\forumrecrutementapp\\areas\\recruiter\\controllers\\recruteurscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{29CC071E-FEC0-4556-B36E-33FCF00F7C91}|ForumRecrutementApp.csproj|solutionrelative:areas\\recruiter\\controllers\\recruteurscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{29CC071E-FEC0-4556-B36E-33FCF00F7C91}|ForumRecrutementApp.csproj|c:\\users\\hajar\\source\\repos\\gestionforum\\forumrecrutementapp\\views\\account\\registerrecruiter.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29CC071E-FEC0-4556-B36E-33FCF00F7C91}|ForumRecrutementApp.csproj|solutionrelative:views\\account\\registerrecruiter.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{29CC071E-FEC0-4556-B36E-33FCF00F7C91}|ForumRecrutementApp.csproj|c:\\users\\hajar\\source\\repos\\gestionforum\\forumrecrutementapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{29CC071E-FEC0-4556-B36E-33FCF00F7C91}|ForumRecrutementApp.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CC071E-FEC0-4556-B36E-33FCF00F7C91}|ForumRecrutementApp.csproj|c:\\users\\hajar\\source\\repos\\gestionforum\\forumrecrutementapp\\areas\\recruiter\\views\\recruteurs\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29CC071E-FEC0-4556-B36E-33FCF00F7C91}|ForumRecrutementApp.csproj|solutionrelative:areas\\recruiter\\views\\recruteurs\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CC071E-FEC0-4556-B36E-33FCF00F7C91}|ForumRecrutementApp.csproj|c:\\users\\hajar\\source\\repos\\gestionforum\\forumrecrutementapp\\areas\\recruiter\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{29CC071E-FEC0-4556-B36E-33FCF00F7C91}|ForumRecrutementApp.csproj|solutionrelative:areas\\recruiter\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29CC071E-FEC0-4556-B36E-33FCF00F7C91}|ForumRecrutementApp.csproj|c:\\users\\hajar\\source\\repos\\gestionforum\\forumrecrutementapp\\areas\\recruiter\\controllers\\recruteurscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29CC071E-FEC0-4556-B36E-33FCF00F7C91}|ForumRecrutementApp.csproj|solutionrelative:areas\\recruiter\\controllers\\recruteurscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{29CC071E-FEC0-4556-B36E-33FCF00F7C91}|ForumRecrutementApp.csproj|c:\\users\\hajar\\source\\repos\\gestionforum\\forumrecrutementapp\\models\\evaluation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -21,10 +37,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{29CC071E-FEC0-4556-B36E-33FCF00F7C91}|ForumRecrutementApp.csproj|c:\\users\\hajar\\source\\repos\\gestionforum\\forumrecrutementapp\\areas\\recruiter\\views\\recruteurs\\evaluer.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{29CC071E-FEC0-4556-B36E-33FCF00F7C91}|ForumRecrutementApp.csproj|solutionrelative:areas\\recruiter\\views\\recruteurs\\evaluer.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{29CC071E-FEC0-4556-B36E-33FCF00F7C91}|ForumRecrutementApp.csproj|c:\\users\\hajar\\source\\repos\\gestionforum\\forumrecrutementapp\\views\\account\\registerrecruiter.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{29CC071E-FEC0-4556-B36E-33FCF00F7C91}|ForumRecrutementApp.csproj|solutionrelative:views\\account\\registerrecruiter.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{29CC071E-FEC0-4556-B36E-33FCF00F7C91}|ForumRecrutementApp.csproj|c:\\users\\hajar\\source\\repos\\gestionforum\\forumrecrutementapp\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -42,11 +54,50 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\Areas\\Recruiter\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Recruiter\\Views\\_ViewImports.cshtml",
+              "ToolTip": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\Areas\\Recruiter\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "Areas\\Recruiter\\Views\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-27T20:33:57.431Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\Areas\\Recruiter\\Views\\Recruteurs\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Recruiter\\Views\\Recruteurs\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\Areas\\Recruiter\\Views\\Recruteurs\\Index.cshtml",
+              "RelativeToolTip": "Areas\\Recruiter\\Views\\Recruteurs\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-27T20:25:31.487Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\Areas\\Recruiter\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Recruiter\\Views\\_ViewStart.cshtml",
+              "ToolTip": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\Areas\\Recruiter\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "Areas\\Recruiter\\Views\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-27T20:23:08.721Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "Evaluation.cs",
               "DocumentMoniker": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\Models\\Evaluation.cs",
               "RelativeDocumentMoniker": "Models\\Evaluation.cs",
@@ -59,20 +110,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAADcAAAAAAAAAAAAiwEoAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAiwEoAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-27T16:18:41.698Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "Evaluer.cshtml",
               "DocumentMoniker": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\Areas\\Recruiter\\Views\\Recruteurs\\Evaluer.cshtml",
               "RelativeDocumentMoniker": "Areas\\Recruiter\\Views\\Recruteurs\\Evaluer.cshtml",
@@ -85,20 +136,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "RegisterRecruiter.cshtml",
               "DocumentMoniker": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\Views\\Account\\RegisterRecruiter.cshtml",
               "RelativeDocumentMoniker": "Views\\Account\\RegisterRecruiter.cshtml",
               "ToolTip": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\Views\\Account\\RegisterRecruiter.cshtml",
               "RelativeToolTip": "Views\\Account\\RegisterRecruiter.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-01-27T16:10:38.842Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
@@ -111,33 +162,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "RecruteursController.cs",
               "DocumentMoniker": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\Areas\\Recruiter\\Controllers\\RecruteursController.cs",
               "RelativeDocumentMoniker": "Areas\\Recruiter\\Controllers\\RecruteursController.cs",
-              "ToolTip": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\Areas\\Recruiter\\Controllers\\RecruteursController.cs*",
-              "RelativeToolTip": "Areas\\Recruiter\\Controllers\\RecruteursController.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKYAAAABAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\Areas\\Recruiter\\Controllers\\RecruteursController.cs",
+              "RelativeToolTip": "Areas\\Recruiter\\Controllers\\RecruteursController.cs",
+              "ViewState": "AgIAAI4AAAAAAAAAAAAiwJ8AAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-27T16:08:41.105Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "AccountController.cs",
               "DocumentMoniker": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
               "ToolTip": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\Controllers\\AccountController.cs",
               "RelativeToolTip": "Controllers\\AccountController.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAowDsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABgBAAAAAAAAAAA6wCEBAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-27T15:33:15.673Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "AdministrateursController.cs",
               "DocumentMoniker": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\Areas\\Admin\\Controllers\\AdministrateursController.cs",
               "RelativeDocumentMoniker": "Areas\\Admin\\Controllers\\AdministrateursController.cs",

@@ -22,54 +22,77 @@ namespace ForumRecrutementApp.Controllers
             ApplicationDbContext context,
             ILogger<AccountController> logger)
         {
-            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
             _logger = logger;
         }
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
+
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("", "Invalid login attempt.");
                 return View(model);
             }
 
             try
             {
                 var result = await _signInManager.PasswordSignInAsync(
-                    model.Email, model.Password, model.RememberMe, false);
+                    model.Email,
+                    model.Password,
+                    model.RememberMe,
+                    lockoutOnFailure: false);
 
                 if (result.Succeeded)
                 {
                     var user = await _userManager.FindByEmailAsync(model.Email);
 
+                    if (user == null)
+                    {
+                        ModelState.AddModelError(string.Empty, "User not found.");
+                        return View(model);
+                    }
+
+                    _logger.LogInformation($"User {user.Email} logged in successfully");
+
                     if (await _userManager.IsInRoleAsync(user, "Admin"))
-                        return RedirectToAction("Dashboard", "Administrateurs");
+                    {
+                        return RedirectToAction("Dashboard", "Administrateurs", new { area = "Admin" });
+                    }
 
                     if (await _userManager.IsInRoleAsync(user, "Recruteur"))
+                    {
                         return RedirectToAction("Index", "Recruteurs", new { area = "Recruiter" });
+                    }
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToLocal(returnUrl);
                 }
 
-                ModelState.AddModelError("", "Invalid login attempt.");
+                if (result.IsLockedOut)
+                {
+                    _logger.LogWarning($"User account {model.Email} locked out");
+                    return RedirectToAction(nameof(Lockout));
+                }
+
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                return View(model);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error occurred during login.");
-                ModelState.AddModelError("", "An error occurred. Please try again later.");
+                _logger.LogError(ex, $"Error during login attempt for user {model.Email}");
+                ModelState.AddModelError(string.Empty, "An error occurred during login. Please try again.");
+                return View(model);
             }
-
-            return View(model);
         }
 
         [HttpGet]
@@ -81,43 +104,76 @@ namespace ForumRecrutementApp.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterRecruiter(RegisterRecruiterViewModel model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
             try
             {
-                var user = new IdentityUser { UserName = model.Email, Email = model.Email };
-                var result = await _userManager.CreateAsync(user, model.Password);
-
-                if (result.Succeeded)
+                var existingUser = await _userManager.FindByEmailAsync(model.Email);
+                if (existingUser != null)
                 {
-                    await _userManager.AddToRoleAsync(user, "Recruteur");
-
-                    var recruteur = new Recruteur
-                    {
-                        Nom = model.Nom,
-                        Entreprise = model.Entreprise,
-                        Email = model.Email,
-                        IdentityUserId = user.Id
-                    };
-
-                    _context.Recruteurs.Add(recruteur);
-                    await _context.SaveChangesAsync();
-
-                    _logger.LogInformation($"New recruiter registered: {model.Email}");
-
-                    await _signInManager.SignInAsync(user, false);
-                    return RedirectToAction("Index", "Recruteurs");
+                    ModelState.AddModelError(string.Empty, "Email already registered.");
+                    return View(model);
                 }
 
-                foreach (var error in result.Errors)
+                var user = new IdentityUser
                 {
-                    ModelState.AddModelError("", error.Description);
+                    UserName = model.Email,
+                    Email = model.Email,
+                    EmailConfirmed = true // Set to true since we're not implementing email confirmation
+                };
+
+                using var transaction = await _context.Database.BeginTransactionAsync();
+
+                try
+                {
+                    var result = await _userManager.CreateAsync(user, model.Password);
+
+                    if (result.Succeeded)
+                    {
+                        var roleResult = await _userManager.AddToRoleAsync(user, "Recruteur");
+
+                        if (!roleResult.Succeeded)
+                        {
+                            throw new Exception("Failed to add user to Recruteur role");
+                        }
+
+                        var recruteur = new Recruteur
+                        {
+                            Nom = model.Nom,
+                            Entreprise = model.Entreprise,
+                            Email = model.Email,
+                            IdentityUserId = user.Id
+                        };
+
+                        _context.Recruteurs.Add(recruteur);
+                        await _context.SaveChangesAsync();
+
+                        await transaction.CommitAsync();
+
+                        _logger.LogInformation($"Created new recruiter account for {model.Email}");
+
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        return RedirectToAction("Index", "Recruteurs", new { area = "Recruiter" });
+                    }
+
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                }
+                catch (Exception)
+                {
+                    await transaction.RollbackAsync();
+                    throw;
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error occurred during recruiter registration.");
-                ModelState.AddModelError("", "An error occurred. Please try again later.");
+                _logger.LogError(ex, $"Error registering recruiter account for {model.Email}");
+                ModelState.AddModelError(string.Empty, "An error occurred during registration. Please try again.");
             }
 
             return View(model);
@@ -132,41 +188,74 @@ namespace ForumRecrutementApp.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterAdmin(RegisterAdminViewModel model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
             try
             {
-                var user = new IdentityUser { UserName = model.Email, Email = model.Email };
-                var result = await _userManager.CreateAsync(user, model.Password);
-
-                if (result.Succeeded)
+                var existingUser = await _userManager.FindByEmailAsync(model.Email);
+                if (existingUser != null)
                 {
-                    await _userManager.AddToRoleAsync(user, "Admin");
-
-                    var admin = new Administrateur
-                    {
-                        Email = model.Email,
-                        IdentityUserId = user.Id
-                    };
-
-                    _context.Administrateurs.Add(admin);
-                    await _context.SaveChangesAsync();
-
-                    _logger.LogInformation($"New admin registered: {model.Email}");
-
-                    await _signInManager.SignInAsync(user, false);
-                    return RedirectToAction("Dashboard", "Administrateurs");
+                    ModelState.AddModelError(string.Empty, "Email already registered.");
+                    return View(model);
                 }
 
-                foreach (var error in result.Errors)
+                var user = new IdentityUser
                 {
-                    ModelState.AddModelError("", error.Description);
+                    UserName = model.Email,
+                    Email = model.Email,
+                    EmailConfirmed = true
+                };
+
+                using var transaction = await _context.Database.BeginTransactionAsync();
+
+                try
+                {
+                    var result = await _userManager.CreateAsync(user, model.Password);
+
+                    if (result.Succeeded)
+                    {
+                        var roleResult = await _userManager.AddToRoleAsync(user, "Admin");
+
+                        if (!roleResult.Succeeded)
+                        {
+                            throw new Exception("Failed to add user to Admin role");
+                        }
+
+                        var admin = new Administrateur
+                        {
+                            Email = model.Email,
+                            IdentityUserId = user.Id
+                        };
+
+                        _context.Administrateurs.Add(admin);
+                        await _context.SaveChangesAsync();
+
+                        await transaction.CommitAsync();
+
+                        _logger.LogInformation($"Created new admin account for {model.Email}");
+
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        return RedirectToAction("Dashboard", "Administrateurs", new { area = "Admin" });
+                    }
+
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                }
+                catch (Exception)
+                {
+                    await transaction.RollbackAsync();
+                    throw;
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error occurred during admin registration.");
-                ModelState.AddModelError("", "An error occurred. Please try again later.");
+                _logger.LogError(ex, $"Error registering admin account for {model.Email}");
+                ModelState.AddModelError(string.Empty, "An error occurred during registration. Please try again.");
             }
 
             return View(model);
@@ -178,14 +267,32 @@ namespace ForumRecrutementApp.Controllers
             try
             {
                 await _signInManager.SignOutAsync();
-                _logger.LogInformation("User logged out.");
+                _logger.LogInformation("User logged out successfully");
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error occurred during logout.");
+                _logger.LogError(ex, "Error during logout");
+                return RedirectToAction("Error", "Home");
             }
+        }
 
-            return RedirectToAction("Index", "Home");
+        [HttpGet]
+        public IActionResult Lockout()
+        {
+            return View();
+        }
+
+        private IActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
     }
 }
