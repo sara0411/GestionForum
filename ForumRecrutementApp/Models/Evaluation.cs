@@ -20,5 +20,6 @@ namespace ForumRecrutementApp.Models
         public int Note { get; set; }
 
         public string Commentaire { get; set; }
+        public DateTime DateEvaluation { get; internal set; }
     }
 }
