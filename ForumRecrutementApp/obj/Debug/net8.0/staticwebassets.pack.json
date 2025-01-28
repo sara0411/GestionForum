@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\wwwroot\\js\\landing-page.jsx",
+      "PackagePath": "staticwebassets\\js\\landing-page.jsx"
+    },
+    {
       "Id": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

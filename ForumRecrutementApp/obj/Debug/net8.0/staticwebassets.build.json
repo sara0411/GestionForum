@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "mzvr6aFEOmMGxeEC8t3CVltuwRbRW6ZRkUKjDIpl6ZM=",
+  "Hash": "pmzi21bvTv0LQF5P4nvqsTLRVwAtj2YWOhOH+0WZZ/s=",
   "Source": "ForumRecrutementApp",
   "BasePath": "_content/ForumRecrutementApp",
   "Mode": "Default",
@@ -1359,6 +1359,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\wwwroot\\js\\landing-page.jsx",
+      "SourceId": "ForumRecrutementApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\wwwroot\\",
+      "BasePath": "_content/ForumRecrutementApp",
+      "RelativePath": "js/landing-page#[.{fingerprint}]?.jsx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "rssht8fol6",
+      "Integrity": "9QYS9EWIY0yVortYtgru4IMubco2PJ1D2VPPxf0WoLI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\landing-page.jsx"
     },
     {
       "Identity": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\wwwroot\\js\\site.js",
@@ -5398,6 +5419,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s="
+        }
+      ]
+    },
+    {
+      "Route": "js/landing-page.jsx",
+      "AssetFile": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\wwwroot\\js\\landing-page.jsx",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5657"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/jscript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9QYS9EWIY0yVortYtgru4IMubco2PJ1D2VPPxf0WoLI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 28 Jan 2025 14:14:12 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9QYS9EWIY0yVortYtgru4IMubco2PJ1D2VPPxf0WoLI="
+        }
+      ]
+    },
+    {
+      "Route": "js/landing-page.rssht8fol6.jsx",
+      "AssetFile": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\wwwroot\\js\\landing-page.jsx",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5657"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/jscript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9QYS9EWIY0yVortYtgru4IMubco2PJ1D2VPPxf0WoLI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 28 Jan 2025 14:14:12 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "rssht8fol6"
+        },
+        {
+          "Name": "label",
+          "Value": "js/landing-page.jsx"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9QYS9EWIY0yVortYtgru4IMubco2PJ1D2VPPxf0WoLI="
         }
       ]
     },

@@ -27,11 +27,18 @@ namespace ForumRecrutementApp.Areas.Recruiter.Controllers
         }
 
         [HttpGet]
+        [HttpGet]
         public async Task<IActionResult> Index(string search)
         {
             try
             {
                 var user = await _userManager.GetUserAsync(User);
+                if (user == null)
+                {
+                    _logger.LogWarning("User not found while accessing Index");
+                    return RedirectToAction("Login", "Account");
+                }
+
                 var roles = await _userManager.GetRolesAsync(user);
                 _logger.LogInformation($"User {user.Email} with roles: {string.Join(", ", roles)} accessing Index");
 
@@ -163,5 +170,6 @@ namespace ForumRecrutementApp.Areas.Recruiter.Controllers
                 return RedirectToAction("Error", "Home");
             }
         }
+
     }
 }
