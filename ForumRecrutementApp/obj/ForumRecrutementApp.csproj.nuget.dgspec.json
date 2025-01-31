@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\ForumRecrutementApp.csproj": {}
+    "C:\\Users\\hp\\source\\repos\\GestionForum\\ForumRecrutementApp\\ForumRecrutementApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\ForumRecrutementApp.csproj": {
+    "C:\\Users\\hp\\source\\repos\\GestionForum\\ForumRecrutementApp\\ForumRecrutementApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\ForumRecrutementApp.csproj",
+        "projectUniqueName": "C:\\Users\\hp\\source\\repos\\GestionForum\\ForumRecrutementApp\\ForumRecrutementApp.csproj",
         "projectName": "ForumRecrutementApp",
-        "projectPath": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\ForumRecrutementApp.csproj",
-        "packagesPath": "C:\\Users\\Hajar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Hajar\\source\\repos\\GestionForum\\ForumRecrutementApp\\obj\\",
+        "projectPath": "C:\\Users\\hp\\source\\repos\\GestionForum\\ForumRecrutementApp\\ForumRecrutementApp.csproj",
+        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\hp\\source\\repos\\GestionForum\\ForumRecrutementApp\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Hajar\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -43,9 +39,8 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
-        },
-        "SdkAnalysisLevel": "9.0.100"
+          "auditMode": "direct"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -93,7 +88,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

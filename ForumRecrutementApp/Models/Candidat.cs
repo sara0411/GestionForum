@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 
 namespace ForumRecrutementApp.Models
 {
@@ -21,16 +23,18 @@ namespace ForumRecrutementApp.Models
         [Required(ErrorMessage = "Les compétences sont requises")]
         public string Competences { get; set; }
 
-        public string CV { get; set; }
-
-        public byte[] CVData { get; set; }
-        public string CVFileName { get; set; }
-        public string CVContentType { get; set; }
-
         [NotMapped]
         public IFormFile CVFile { get; set; }
+
+        public string CV { get; set; }
+
+        // Foreign key for Forum (nullable)
         public int? ForumId { get; set; }
 
+        // Navigation property for Forum
         public Forum Forum { get; set; }
+
+        // Navigation property for Evaluations
+        public ICollection<Evaluation> Evaluations { get; set; } = new List<Evaluation>();
     }
 }

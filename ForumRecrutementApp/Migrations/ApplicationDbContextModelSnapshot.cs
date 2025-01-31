@@ -43,9 +43,7 @@ namespace ForumRecrutementApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdentityUserId")
-                        .IsUnique()
-                        .HasFilter("[IdentityUserId] IS NOT NULL");
+                    b.HasIndex("IdentityUserId");
 
                     b.ToTable("Administrateurs");
                 });
@@ -59,18 +57,6 @@ namespace ForumRecrutementApp.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CV")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CVContentType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("CVData")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("CVFileName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -98,6 +84,28 @@ namespace ForumRecrutementApp.Migrations
                     b.HasIndex("ForumId");
 
                     b.ToTable("Candidats");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CV = "john_doe_cv.pdf",
+                            Competences = "C#, .NET, SQL",
+                            Email = "john.doe@example.com",
+                            ForumId = 1,
+                            Nom = "Doe",
+                            Prenom = "John"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CV = "jane_smith_cv.pdf",
+                            Competences = "Java, Spring Boot, Hibernate",
+                            Email = "jane.smith@example.com",
+                            ForumId = 2,
+                            Nom = "Smith",
+                            Prenom = "Jane"
+                        });
                 });
 
             modelBuilder.Entity("ForumRecrutementApp.Models.Evaluation", b =>
@@ -111,9 +119,16 @@ namespace ForumRecrutementApp.Migrations
                     b.Property<int>("CandidatId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CandidatId1")
+                        .HasColumnType("int");
+
                     b.Property<string>("Commentaire")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime>("DateEvaluation")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Note")
                         .HasColumnType("int");
@@ -121,11 +136,18 @@ namespace ForumRecrutementApp.Migrations
                     b.Property<int>("RecruteurId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("RecruteurId1")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CandidatId");
 
+                    b.HasIndex("CandidatId1");
+
                     b.HasIndex("RecruteurId");
+
+                    b.HasIndex("RecruteurId1");
 
                     b.ToTable("Evaluations");
                 });
@@ -148,6 +170,26 @@ namespace ForumRecrutementApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Forums");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nom = "Forum 1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nom = "Forum 2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nom = "Forum 3"
+                        });
                 });
 
             modelBuilder.Entity("ForumRecrutementApp.Models.Recruteur", b =>
@@ -181,8 +223,7 @@ namespace ForumRecrutementApp.Migrations
 
                     b.HasIndex("ForumId");
 
-                    b.HasIndex("IdentityUserId")
-                        .IsUnique();
+                    b.HasIndex("IdentityUserId");
 
                     b.ToTable("Recruteurs");
                 });
@@ -388,8 +429,8 @@ namespace ForumRecrutementApp.Migrations
             modelBuilder.Entity("ForumRecrutementApp.Models.Administrateur", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
-                        .WithOne()
-                        .HasForeignKey("ForumRecrutementApp.Models.Administrateur", "IdentityUserId");
+                        .WithMany()
+                        .HasForeignKey("IdentityUserId");
 
                     b.Navigation("IdentityUser");
                 });
@@ -411,11 +452,19 @@ namespace ForumRecrutementApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ForumRecrutementApp.Models.Candidat", null)
+                        .WithMany("Evaluations")
+                        .HasForeignKey("CandidatId1");
+
                     b.HasOne("ForumRecrutementApp.Models.Recruteur", "Recruteur")
                         .WithMany()
                         .HasForeignKey("RecruteurId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("ForumRecrutementApp.Models.Recruteur", null)
+                        .WithMany("Evaluations")
+                        .HasForeignKey("RecruteurId1");
 
                     b.Navigation("Candidat");
 
@@ -429,8 +478,8 @@ namespace ForumRecrutementApp.Migrations
                         .HasForeignKey("ForumId");
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
-                        .WithOne()
-                        .HasForeignKey("ForumRecrutementApp.Models.Recruteur", "IdentityUserId")
+                        .WithMany()
+                        .HasForeignKey("IdentityUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -490,11 +539,21 @@ namespace ForumRecrutementApp.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ForumRecrutementApp.Models.Candidat", b =>
+                {
+                    b.Navigation("Evaluations");
+                });
+
             modelBuilder.Entity("ForumRecrutementApp.Models.Forum", b =>
                 {
                     b.Navigation("Candidats");
 
                     b.Navigation("Recruteurs");
+                });
+
+            modelBuilder.Entity("ForumRecrutementApp.Models.Recruteur", b =>
+                {
+                    b.Navigation("Evaluations");
                 });
 #pragma warning restore 612, 618
         }

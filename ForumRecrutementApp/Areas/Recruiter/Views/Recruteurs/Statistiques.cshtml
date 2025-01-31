@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Statistiques";
+}
+
+<!-- Hero Section -->
+<section class="bg-gradient-to-r from-blue-800 to-blue-600 text-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-5xl font-bold mb-6">Statistiques</h1>
+        <p class="text-xl mb-8">Analysez les performances de vos évaluations.</p>
+    </div>
+</section>
+
+<!-- Statistics Section -->
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-center mb-12">Vos statistiques</h2>
+
+        <!-- Key Metrics -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center">
+                <p class="text-4xl font-bold">@ViewBag.TotalEvaluations</p>
+                <p class="text-gray-600">Évaluations effectuées</p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center">
+                <p class="text-4xl font-bold">@ViewBag.AverageNote.ToString("0.0")</p>
+                <p class="text-gray-600">Note moyenne</p>
+            </div>
+        </div>
+
+        <!-- Graph 1: Évolution des évaluations -->
+        <div class="mb-12">
+            <h3 class="text-xl font-semibold mb-4">Évolution des évaluations</h3>
+            <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                <canvas id="evaluationsChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-blue-800 text-white py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p>&copy; @DateTime.Now.Year ForumRecrutementApp. Tous droits réservés.</p>
+        <p class="mt-2"><a href="#" class="underline hover:text-blue-200">Politique de confidentialité</a></p>
+    </div>
+</footer>
+
+<!-- Chart.js Script -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Graph 1: Évolution des évaluations
+    const evaluationsCtx = document.getElementById('evaluationsChart').getContext('2d');
+    const evaluationsChart = new Chart(evaluationsCtx, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin'],
+            datasets: [{
+                label: 'Évaluations',
+                data: [5, 10, 15, 20, 25, 30],
+                backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                borderColor: 'rgba(59, 130, 246, 1)',
+                borderWidth: 2,
+                fill: true
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

@@ -8,11 +8,51 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ForumRecrutementApp.styles.css" asp-append-version="true" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
+    <style>
+        /* Custom styles for a modern look */
+        .navbar {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+        }
+
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+
+            .nav-link:hover {
+                color: #d1d5db !important;
+            }
+
+        .btn-primary {
+            background-color: #3b82f6;
+            border-color: #3b82f6;
+            transition: background-color 0.3s ease;
+        }
+
+            .btn-primary:hover {
+                background-color: #2563eb;
+                border-color: #2563eb;
+            }
+
+        .footer {
+            background: #1e3a8a;
+            color: white;
+        }
+
+            .footer a {
+                color: #93c5fd;
+            }
+
+                .footer a:hover {
+                    color: #bfdbfe;
+                }
+    </style>
+    @RenderSection("Styles", required: false)
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ForumRecrutementApp</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -22,55 +62,54 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Accueil</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Accueil</a>
                         </li>
-
-                        @if (User.Identity.IsAuthenticated)
+                        @if (User.Identity != null && User.Identity.IsAuthenticated)
                         {
                             @if (User.IsInRole("Admin"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="Administrateurs" asp-action="Dashboard">Administration</a>
+                                    <a class="nav-link" asp-area="Admin" asp-controller="Administrateurs" asp-action="Dashboard">Administration</a>
                                 </li>
                             }
-
                             @if (User.IsInRole("Recruteur"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="Recruiter" asp-controller="Recruteurs" asp-action="Index">Espace Recruteur</a>
+                                    <a class="nav-link" asp-area="Recruiter" asp-controller="Recruteurs" asp-action="Index">Espace Recruteur</a>
                                 </li>
-                                 <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Candidate" asp-controller="Candidats" asp-action="Index">Candidats</a>
-                            </li>
-                             <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="Recruiter" asp-controller="Recruteurs" asp-action="Dashboard"> Evaluer</a>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="Candidate" asp-controller="Candidats" asp-action="Index">Liste des Candidats</a>
+
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Recruiter" asp-controller="Recruteurs" asp-action="Statistiques">Statistiques</a>
+                                </li>
+                               
                             }
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Candidate" asp-controller="Candidats" asp-action="Create">Déposer CV</a>
+                                <a class="nav-link" asp-area="Candidate" asp-controller="Candidats" asp-action="Create">Déposer CV</a>
                             </li>
                         }
                     </ul>
-
                     <ul class="navbar-nav">
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <span class="nav-link text-dark">Bonjour, @User.Identity.Name!</span>
+                                <span class="nav-link">Bonjour, @User.Identity.Name!</span>
                             </li>
                             <li class="nav-item">
                                 <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" class="form-inline">
-                                    <button type="submit" class="nav-link btn btn-link text-dark">Déconnexion</button>
+                                    <button type="submit" class="nav-link btn btn-link">Déconnexion</button>
                                 </form>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Inscription
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -79,7 +118,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Connexion</a>
+                                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">Connexion</a>
                             </li>
                         }
                     </ul>
@@ -94,9 +133,40 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - ForumRecrutementApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="bg-blue-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+                <!-- Column 1: About -->
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-lg font-semibold mb-4">À propos</h3>
+                    <p class="text-sm">ForumRecrutementApp simplifie le processus de recrutement en connectant les talents aux meilleures entreprises.</p>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-lg font-semibold mb-4">Liens rapides</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-sm hover:text-blue-200">Accueil</a></li>
+                        <li><a href="#" class="text-sm hover:text-blue-200">Fonctionnalités</a></li>
+                        <li><a href="#" class="text-sm hover:text-blue-200">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Contact -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="text-sm">Email: <a href="mailto:contact@forumrecrutement.com" class="hover:text-blue-200">contact@forumrecrutement.com</a></li>
+                        <li class="text-sm">Téléphone: +33 123 456 789</li>
+                        <li class="text-sm">Adresse: 123 Rue de Paris, France</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="mt-8 border-t border-blue-700 pt-6 text-center">
+                <p class="text-sm">&copy; @DateTime.Now.Year ForumRecrutementApp. Tous droits réservés.</p>
+            </div>
         </div>
     </footer>
 

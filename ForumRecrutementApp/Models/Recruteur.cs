@@ -18,6 +18,7 @@ public class Recruteur
     public string Entreprise { get; set; }
     public int? ForumId { get; set; }
     public Forum Forum { get; set; }
-}
+        public ICollection<Evaluation> Evaluations { get; set; } = new List<Evaluation>();
+    }
 
 }

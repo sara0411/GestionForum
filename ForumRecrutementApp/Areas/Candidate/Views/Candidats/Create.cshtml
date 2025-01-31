@@ -1,43 +1,56 @@
 ﻿@model ForumRecrutementApp.Models.Candidat
 
-<h2>Créer un Candidat</h2>
+<h2 class="text-3xl font-bold text-center mb-8">Créer un Candidat</h2>
 
-<form asp-action="Create" method="post" enctype="multipart/form-data">
- 
-    <div class="form-group">
-        <label for="Nom">Nom</label>
-        <input asp-for="Nom" class="form-control" placeholder="Nom" required />
-        <span asp-validation-for="Nom" class="text-danger"></span>
+<form asp-action="Create" method="post" enctype="multipart/form-data" class="max-w-2xl mx-auto bg-white p-6 md:p-8 rounded-lg shadow-md">
+    <!-- Nom Field -->
+    <div class="mb-6">
+        <label for="Nom" class="block text-sm font-medium text-gray-700">Nom</label>
+        <input asp-for="Nom" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Entrez votre nom" required />
+        <span asp-validation-for="Nom" class="text-sm text-red-600"></span>
     </div>
-    <div class="form-group">
-        <label for="Prenom">Prénom</label>
-        <input asp-for="Prenom" class="form-control" placeholder="Prénom" required />
-        <span asp-validation-for="Prenom" class="text-danger"></span>
+
+    <!-- Prénom Field -->
+    <div class="mb-6">
+        <label for="Prenom" class="block text-sm font-medium text-gray-700">Prénom</label>
+        <input asp-for="Prenom" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Entrez votre prénom" required />
+        <span asp-validation-for="Prenom" class="text-sm text-red-600"></span>
     </div>
-    <div class="form-group">
-        <label for="Email">Email</label>
-        <input asp-for="Email" class="form-control" type="email" placeholder="Email" required />
-        <span asp-validation-for="Email" class="text-danger"></span>
+
+    <!-- Email Field -->
+    <div class="mb-6">
+        <label for="Email" class="block text-sm font-medium text-gray-700">Email</label>
+        <input asp-for="Email" type="email" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Entrez votre email" required />
+        <span asp-validation-for="Email" class="text-sm text-red-600"></span>
     </div>
-    <div class="form-group">
-        <label for="Competences">Compétences</label>
-        <textarea asp-for="Competences" class="form-control" placeholder="Compétences" required></textarea>
-        <span asp-validation-for="Competences" class="text-danger"></span>
+
+    <!-- Compétences Field -->
+    <div class="mb-6">
+        <label for="Competences" class="block text-sm font-medium text-gray-700">Compétences</label>
+        <textarea asp-for="Competences" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Décrivez vos compétences" required></textarea>
+        <span asp-validation-for="Competences" class="text-sm text-red-600"></span>
     </div>
-    <div class="form-group">
-        <label for="CVFile">CV</label>
-        <input asp-for="CVFile" type="file" class="form-control" />
-        <span asp-validation-for="CVFile" class="text-danger"></span>
+
+    <!-- CV File Upload -->
+    <div class="mb-6">
+        <label for="CVFile" class="block text-sm font-medium text-gray-700">CV</label>
+        <input asp-for="CVFile" type="file" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+        <span asp-validation-for="CVFile" class="text-sm text-red-600"></span>
     </div>
-    <div class="form-group">
-        <label asp-for="ForumId" class="control-label">Forum</label>
-        <select asp-for="ForumId" class="form-control" asp-items="ViewBag.Forums">
-            <option value="">-- Select Forum --</option>
+
+    <!-- Forum Selection -->
+    <div class="mb-6">
+        <label asp-for="ForumId" class="block text-sm font-medium text-gray-700">Forum</label>
+        <select asp-for="ForumId" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" asp-items="ViewBag.Forums">
+            <option value="">-- Sélectionnez un Forum --</option>
         </select>
-        <span asp-validation-for="ForumId" class="text-danger"></span>
+        <span asp-validation-for="ForumId" class="text-sm text-red-600"></span>
     </div>
 
-
-
-    <button type="submit" class="btn btn-primary">Soumettre</button>
+    <!-- Submit Button -->
+    <div class="text-center">
+        <button type="submit" class="w-full md:w-auto px-6 py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+            Soumettre
+        </button>
+    </div>
 </form>

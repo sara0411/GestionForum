@@ -1,15 +1,88 @@
 ﻿@{
-    ViewData["Title"] = "Dashboard Recruteur";
+    ViewData["Title"] = "Espace Recruteur";
 }
-<form method="get">
-    <input name="search" placeholder="Rechercher par compétence" />
-    <button type="submit">Rechercher</button>
-</form>
 
-@foreach (var candidat in Model)
-{
-    <div>
-        <p>@candidat.Nom @candidat.Prenom - @candidat.Competences</p>
-        <a asp-action="Evaluer" asp-route-id="@candidat.Id">Évaluer</a>
+<!-- Hero Section -->
+<section class="bg-gradient-to-r from-blue-800 to-blue-600 text-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-5xl font-bold mb-6">Bienvenue, @User.Identity.Name !</h1>
+        <p class="text-xl mb-8">Gérez vos candidats et vos offres d'emploi en toute simplicité.</p>
+        <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
+            <a href="@Url.Action("Index", "Candidats", new { area = "Candidate" })"
+               class="bg-white text-blue-600 px-6 py-3 rounded-md font-semibold hover:bg-blue-50 transition duration-300">
+                Voir les candidats
+            </a>
+            <a href="@Url.Action("Create", "Offres", new { area = "Recruiter" })"
+               class="bg-transparent border border-white text-white px-6 py-3 rounded-md font-semibold hover:bg-white hover:text-blue-600 transition duration-300">
+                Publier une offre
+            </a>
+        </div>
     </div>
-}
+</section>
+
+<!-- Dashboard Section -->
+<section id="dashboard" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-center mb-12">Tableau de bord</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Candidats récents -->
+            <div class="text-center p-6 bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                <div class="flex justify-center">
+                    <i class="fas fa-users text-4xl text-blue-600 mb-4"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Candidats récents</h3>
+                <p class="text-gray-600">Consultez les derniers candidats ayant postulé à vos offres.</p>
+                <a href="@Url.Action("Index", "Candidats", new { area = "Candidate" })"
+                   class="mt-4 inline-block text-blue-600 hover:text-blue-700">
+                    Voir plus →
+                </a>
+            </div>
+
+            <!-- Offres publiées -->
+            <div class="text-center p-6 bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                <div class="flex justify-center">
+                    <i class="fas fa-briefcase text-4xl text-blue-600 mb-4"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Offres publiées</h3>
+                <p class="text-gray-600">Gérez vos offres d'emploi et consultez les candidatures.</p>
+                <a href="@Url.Action("Index", "Offres", new { area = "Recruiter" })"
+                   class="mt-4 inline-block text-blue-600 hover:text-blue-700">
+                    Voir plus →
+                </a>
+            </div>
+
+            <!-- Statistiques -->
+            <div class="text-center p-6 bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                <div class="flex justify-center">
+                    <i class="fas fa-chart-line text-4xl text-blue-600 mb-4"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Statistiques</h3>
+                <p class="text-gray-600">Suivez les performances de vos offres et candidats.</p>
+                <a href="@Url.Action("Statistics", "Recruteurs", new { area = "Recruiter" })"
+                   class="mt-4 inline-block text-blue-600 hover:text-blue-700">
+                    Voir plus →
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call-to-Action Section -->
+<section class="bg-gradient-to-r from-blue-800 to-blue-600 text-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold mb-6">Besoin d'aide ?</h2>
+        <p class="text-xl mb-8">Notre équipe est là pour vous accompagner dans votre processus de recrutement.</p>
+        <a href="@Url.Action("Contact", "Home")"
+           class="bg-white text-blue-600 px-6 py-3 rounded-md font-semibold hover:bg-blue-50 transition duration-300">
+            Contactez-nous
+        </a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-blue-800 text-white py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p>&copy; @DateTime.Now.Year ForumRecrutementApp. Tous droits réservés.</p>
+        <p class="mt-2"><a href="#" class="underline hover:text-blue-200">Politique de confidentialité</a></p>
+    </div>
+</footer>

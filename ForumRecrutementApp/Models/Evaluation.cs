@@ -1,8 +1,8 @@
-﻿using ForumRecrutementApp.Models;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
+
 namespace ForumRecrutementApp.Models
 {
-
     public class Evaluation
     {
         [Key]
@@ -10,16 +10,23 @@ namespace ForumRecrutementApp.Models
 
         [Required]
         public int CandidatId { get; set; }
-        public Candidat Candidat { get; set; }
 
         [Required]
         public int RecruteurId { get; set; }
-        public Recruteur Recruteur { get; set; }
 
-        [Range(1, 5)]
+        [Required]
+        [Range(1, 5, ErrorMessage = "La note doit être comprise entre 1 et 5.")]
         public int Note { get; set; }
 
+        [Required]
+        [StringLength(500, ErrorMessage = "Le commentaire ne peut pas dépasser 500 caractères.")]
         public string Commentaire { get; set; }
-        public DateTime DateEvaluation { get; internal set; }
+
+        [Required]
+        public DateTime DateEvaluation { get; set; } = DateTime.Now;
+
+        // Navigation properties
+        public Candidat Candidat { get; set; }
+        public Recruteur Recruteur { get; set; }
     }
 }

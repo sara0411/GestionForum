@@ -27,8 +27,7 @@ namespace ForumRecrutementApp.Areas.Recruiter.Controllers
         }
 
         [HttpGet]
-        [HttpGet]
-        public async Task<IActionResult> Index(string search)
+        public async Task<IActionResult> Index(string search, int page = 1, int pageSize = 10)
         {
             try
             {
@@ -42,13 +41,33 @@ namespace ForumRecrutementApp.Areas.Recruiter.Controllers
                 var roles = await _userManager.GetRolesAsync(user);
                 _logger.LogInformation($"User {user.Email} with roles: {string.Join(", ", roles)} accessing Index");
 
-                var candidats = from c in _context.Candidats
-                                select c;
+                // Base query
+                var query = _context.Candidats.AsQueryable();
+
+                // Apply search filter
                 if (!string.IsNullOrEmpty(search))
                 {
-                    candidats = candidats.Where(s => s.Competences.Contains(search));
+                    query = query.Where(c => c.Competences.Contains(search));
                 }
-                return View(await candidats.ToListAsync());
+
+                // Pagination
+                var totalItems = await query.CountAsync();
+                var totalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
+
+                var candidats = await query
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
+                    .Include(c => c.Forum) // Include related data if needed
+                    .ToListAsync();
+
+                // Pass data to the view
+                ViewBag.PageIndex = page;
+                ViewBag.TotalPages = totalPages;
+                ViewBag.HasPreviousPage = page > 1;
+                ViewBag.HasNextPage = page < totalPages;
+                ViewBag.Search = search; // Pass the search term back to the view
+
+                return View(candidats);
             }
             catch (Exception ex)
             {
@@ -79,9 +98,11 @@ namespace ForumRecrutementApp.Areas.Recruiter.Controllers
                     return NotFound();
                 }
 
+                // Pass data to the view
                 ViewBag.CandidatId = id;
                 ViewBag.CandidatNom = candidat.Nom;
                 ViewBag.RecruteurId = recruteur.Id;
+
                 return View();
             }
             catch (Exception ex)
@@ -109,10 +130,12 @@ namespace ForumRecrutementApp.Areas.Recruiter.Controllers
                         return View(evaluation);
                     }
 
+                    // Set evaluation properties
                     evaluation.CandidatId = id;
                     evaluation.RecruteurId = recruteur.Id;
                     evaluation.DateEvaluation = DateTime.Now;
 
+                    // Add the evaluation to the database
                     _context.Evaluations.Add(evaluation);
                     await _context.SaveChangesAsync();
 
@@ -126,12 +149,54 @@ namespace ForumRecrutementApp.Areas.Recruiter.Controllers
                 ModelState.AddModelError("", "Une erreur s'est produite lors de l'enregistrement de l'évaluation.");
             }
 
+            // If we reach here, something went wrong
             ViewBag.CandidatId = id;
             return View(evaluation);
         }
 
+        /*  [HttpGet]
+          public async Task<IActionResult> Dashboard()
+          {
+              try
+              {
+                  var user = await _userManager.GetUserAsync(User);
+                  var recruteur = await _context.Recruteurs
+                      .FirstOrDefaultAsync(r => r.IdentityUserId == user.Id);
+
+                  if (recruteur != null)
+                  {
+                      var evaluationStats = await _context.Evaluations
+                          .Where(e => e.RecruteurId == recruteur.Id)
+                          .GroupBy(e => e.CandidatId)
+                          .Select(g => new
+                          {
+                              CandidatCount = g.Count(),
+                              AverageNote = g.Average(e => e.Note)
+                          })
+                          .FirstOrDefaultAsync();
+
+                      ViewBag.TotalEvaluations = evaluationStats?.CandidatCount ?? 0;
+                      ViewBag.AverageNote = evaluationStats?.AverageNote ?? 0;
+                      _logger.LogInformation($"Dashboard loaded for recruiter {recruteur.Id}");
+                  }
+                  else
+                  {
+                      _logger.LogWarning($"No recruiter found for user {user.Email}");
+                      ViewBag.TotalEvaluations = 0;
+                      ViewBag.AverageNote = 0;
+                  }
+
+                  return View();
+              }
+              catch (Exception ex)
+              {
+                  _logger.LogError(ex, "Error in Dashboard action");
+                  return RedirectToAction("Error", "Home");
+              }
+          }*/
+
         [HttpGet]
-        public async Task<IActionResult> Dashboard()
+        public async Task<IActionResult> Statistiques()
         {
             try
             {
@@ -139,37 +204,38 @@ namespace ForumRecrutementApp.Areas.Recruiter.Controllers
                 var recruteur = await _context.Recruteurs
                     .FirstOrDefaultAsync(r => r.IdentityUserId == user.Id);
 
-                if (recruteur != null)
+                if (recruteur == null)
                 {
-                    var evaluationStats = await _context.Evaluations
-                        .Where(e => e.RecruteurId == recruteur.Id)
-                        .GroupBy(e => e.CandidatId)
-                        .Select(g => new
-                        {
-                            CandidatCount = g.Count(),
-                            AverageNote = g.Average(e => e.Note)
-                        })
-                        .FirstOrDefaultAsync();
-
-                    ViewBag.TotalEvaluations = evaluationStats?.CandidatCount ?? 0;
-                    ViewBag.AverageNote = evaluationStats?.AverageNote ?? 0;
-                    _logger.LogInformation($"Dashboard loaded for recruiter {recruteur.Id}");
-                }
-                else
-                {
-                    _logger.LogWarning($"No recruiter found for user {user.Email}");
-                    ViewBag.TotalEvaluations = 0;
-                    ViewBag.AverageNote = 0;
+                    _logger.LogWarning($"Recruiter not found for user {user.Email}");
+                    return RedirectToAction("Error", "Home");
                 }
 
+                // Fetch statistics for evaluations
+                var evaluationStats = await _context.Evaluations
+                    .Where(e => e.RecruteurId == recruteur.Id)
+                    .GroupBy(e => e.CandidatId)
+                    .Select(g => new
+                    {
+                        CandidatCount = g.Count(),
+                        AverageNote = g.Average(e => e.Note)
+                    })
+                    .FirstOrDefaultAsync();
+
+                // Pass data to the view
+                ViewBag.TotalEvaluations = evaluationStats?.CandidatCount ?? 0;
+                ViewBag.AverageNote = evaluationStats?.AverageNote ?? 0;
+
+                _logger.LogInformation($"Statistics loaded for recruiter {recruteur.Id}");
                 return View();
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error in Dashboard action");
+                _logger.LogError(ex, "Error in Statistiques action");
                 return RedirectToAction("Error", "Home");
             }
         }
+
+
 
     }
 }
