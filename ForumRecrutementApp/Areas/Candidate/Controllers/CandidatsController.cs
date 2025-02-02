@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
 
 [Area("Candidate")]
 [AllowAnonymous]
@@ -14,23 +15,38 @@ using Microsoft.AspNetCore.Authorization;
 public class CandidatsController : Controller
 {
     private readonly ApplicationDbContext _context;
+    private readonly ILogger<CandidatsController> _logger;
 
-    public CandidatsController(ApplicationDbContext context)
+
+    public CandidatsController(
+      ApplicationDbContext context,
+      ILogger<CandidatsController> logger)
     {
         _context = context;
+        _logger = logger;
     }
 
     // GET: Candidats/Index
     public async Task<IActionResult> Index()
     {
-        Console.WriteLine("Index: Fetching list of candidats");
-        var candidats = await _context.Candidats.ToListAsync();
-        Console.WriteLine($"Index: Found {candidats.Count} candidats");
-        return View(candidats);
+        try
+        {
+            var candidates = await _context.Candidats
+                .Include(c => c.Forum)
+                .ToListAsync();
+
+            return View(candidates);
+        }
+        catch (Exception ex)
+        {
+            // Log the error
+            _logger.LogError(ex, "Error fetching candidates");
+            return View("Error");
+        }
     }
 
-    // GET: Candidats/Create
-    public IActionResult Create()
+// GET: Candidats/Create
+public IActionResult Create()
     {
         Console.WriteLine("Create GET: Preparing form");
         var forums = _context.Forums.ToList();
@@ -44,7 +60,6 @@ public class CandidatsController : Controller
         return View();
     }
 
-    // POST: Candidats/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Candidat candidat)
@@ -52,12 +67,10 @@ public class CandidatsController : Controller
         Console.WriteLine("Create POST: Form submitted");
         Console.WriteLine($"Create POST: Received ForumId value: {candidat.ForumId}");
 
-        // Clear any existing model errors for these fields
         ModelState.Remove("CV");
         ModelState.Remove("Forum");
         ModelState.Remove("ForumId");
 
-        // Process CV file
         if (candidat.CVFile != null && candidat.CVFile.Length > 0)
         {
             Console.WriteLine("Create POST: CV file uploaded");
@@ -143,9 +156,6 @@ public class CandidatsController : Controller
         }
     }
 
-    // GET: Candidats/Edit/5
-
-    // GET: Candidats/Edit/5
     public async Task<IActionResult> Edit(int? id)
     {
         Console.WriteLine($"Edit GET: Called with id = {id}");
@@ -170,7 +180,6 @@ public class CandidatsController : Controller
         return View(candidat);
     }
 
-    // POST: Candidats/Edit/5
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, Candidat candidat)
@@ -183,12 +192,10 @@ public class CandidatsController : Controller
             return NotFound();
         }
 
-        // Remove validation for certain properties
         ModelState.Remove("CV");
         ModelState.Remove("Forum");
         ModelState.Remove("ForumId");
 
-        // Retrieve the existing candidate to preserve the CV if no new file is uploaded
         var existingCandidat = await _context.Candidats.AsNoTracking()
             .FirstOrDefaultAsync(c => c.Id == id);
 
@@ -198,14 +205,12 @@ public class CandidatsController : Controller
             return NotFound();
         }
 
-        // Handle CV file upload
         if (candidat.CVFile != null && candidat.CVFile.Length > 0)
         {
             Console.WriteLine("Edit POST: CV file uploaded");
             var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
             Directory.CreateDirectory(uploadsFolder);
 
-            // Add timestamp to filename to prevent duplicates
             var fileName = $"{Path.GetFileNameWithoutExtension(candidat.CVFile.FileName)}_{DateTime.Now:yyyyMMddHHmmss}{Path.GetExtension(candidat.CVFile.FileName)}";
             var filePath = Path.Combine(uploadsFolder, fileName);
 
@@ -216,7 +221,6 @@ public class CandidatsController : Controller
                     await candidat.CVFile.CopyToAsync(stream);
                 }
 
-                // Delete old CV file if it exists
                 if (!string.IsNullOrEmpty(existingCandidat.CV))
                 {
                     var oldFilePath = Path.Combine(uploadsFolder, existingCandidat.CV);
@@ -238,10 +242,9 @@ public class CandidatsController : Controller
         else
         {
             Console.WriteLine("Edit POST: No new CV file uploaded, keeping existing CV");
-            candidat.CV = existingCandidat.CV; // Preserve existing CV filename
+            candidat.CV = existingCandidat.CV; 
         }
 
-        // Validate Forum selection
         if (candidat.ForumId.HasValue && candidat.ForumId > 0)
         {
             var forum = await _context.Forums.FindAsync(candidat.ForumId);

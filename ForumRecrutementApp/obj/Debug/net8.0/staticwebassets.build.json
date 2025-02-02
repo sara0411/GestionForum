@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "bC1Zz3UWXcnud9cfEadC9DkcKdtrlsklgrsUdPyaK4s=",
+  "Hash": "jmIxlF+6Zc5w8+WzkthuoVNNLsP3I4mkQTXTg1TfilA=",
   "Source": "ForumRecrutementApp",
   "BasePath": "_content/ForumRecrutementApp",
   "Mode": "Default",
@@ -2354,6 +2354,25 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
+      "Identity": "C:\\Users\\hp\\source\\repos\\GestionForum\\ForumRecrutementApp\\wwwroot\\uploads\\Anglais_20250201220344.pdf",
+      "SourceId": "ForumRecrutementApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\hp\\source\\repos\\GestionForum\\ForumRecrutementApp\\wwwroot\\",
+      "BasePath": "_content/ForumRecrutementApp",
+      "RelativePath": "uploads/Anglais_20250201220344.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\Anglais_20250201220344.pdf"
+    },
+    {
       "Identity": "C:\\Users\\hp\\source\\repos\\GestionForum\\ForumRecrutementApp\\wwwroot\\uploads\\Cours (1).pdf",
       "SourceId": "ForumRecrutementApp",
       "SourceType": "Discovered",
@@ -2371,6 +2390,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\Cours (1).pdf"
+    },
+    {
+      "Identity": "C:\\Users\\hp\\source\\repos\\GestionForum\\ForumRecrutementApp\\wwwroot\\uploads\\Cours marketing_20250201223120.pdf",
+      "SourceId": "ForumRecrutementApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\hp\\source\\repos\\GestionForum\\ForumRecrutementApp\\wwwroot\\",
+      "BasePath": "_content/ForumRecrutementApp",
+      "RelativePath": "uploads/Cours marketing_20250201223120.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\Cours marketing_20250201223120.pdf"
     },
     {
       "Identity": "C:\\Users\\hp\\source\\repos\\GestionForum\\ForumRecrutementApp\\wwwroot\\uploads\\Réunion.pdf",

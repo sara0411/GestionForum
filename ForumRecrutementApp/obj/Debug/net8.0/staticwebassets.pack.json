@@ -249,8 +249,16 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "C:\\Users\\hp\\source\\repos\\GestionForum\\ForumRecrutementApp\\wwwroot\\uploads\\Anglais_20250201220344.pdf",
+      "PackagePath": "staticwebassets\\uploads\\Anglais_20250201220344.pdf"
+    },
+    {
       "Id": "C:\\Users\\hp\\source\\repos\\GestionForum\\ForumRecrutementApp\\wwwroot\\uploads\\Cours (1).pdf",
       "PackagePath": "staticwebassets\\uploads\\Cours (1).pdf"
+    },
+    {
+      "Id": "C:\\Users\\hp\\source\\repos\\GestionForum\\ForumRecrutementApp\\wwwroot\\uploads\\Cours marketing_20250201223120.pdf",
+      "PackagePath": "staticwebassets\\uploads\\Cours marketing_20250201223120.pdf"
     },
     {
       "Id": "C:\\Users\\hp\\source\\repos\\GestionForum\\ForumRecrutementApp\\wwwroot\\uploads\\Revision-HajarAfdel_20250130131240.pdf",

@@ -19,6 +19,13 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
 
+builder.Services.AddLogging(logging =>
+{
+    logging.ClearProviders();
+    logging.AddConsole();
+    logging.AddDebug();
+});
+
 // Configure cookie settings
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -65,7 +72,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 

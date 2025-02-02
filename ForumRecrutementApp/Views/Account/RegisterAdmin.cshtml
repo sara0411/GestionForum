@@ -11,31 +11,34 @@
                     <h2 class="text-center mb-0">Inscription Administrateur</h2>
                 </div>
                 <div class="card-body p-4">
-                    <form asp-action="RegisterAdmin" asp-controller="Account" method="post">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                        <div class="form-group mb-3">
-                            <label asp-for="Email" class="form-label">Email</label>
-                            <input asp-for="Email" class="form-control" placeholder="Entrez votre email" />
-                            <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
+<form asp-action="RegisterAdmin" method="post">
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
 
-                        <div class="form-group mb-3">
-                            <label asp-for="Password" class="form-label">Mot de passe</label>
-                            <input asp-for="Password" class="form-control" type="password" placeholder="Entrez votre mot de passe" />
-                            <span asp-validation-for="Password" class="text-danger"></span>
-                        </div>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
 
-                        <div class="form-group mb-3">
-                            <label asp-for="ConfirmPassword" class="form-label">Confirmer le mot de passe</label>
-                            <input asp-for="ConfirmPassword" class="form-control" type="password" placeholder="Confirmez votre mot de passe" />
-                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                        </div>
+    <div class="form-group">
+        <label asp-for="ConfirmPassword"></label>
+        <input asp-for="ConfirmPassword" class="form-control" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
 
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary">S'inscrire comme Administrateur</button>
-                        </div>
-                    </form>
+    <div class="form-group">
+        <label asp-for="Nom"></label>
+        <input asp-for="Nom" class="form-control" />
+        <span asp-validation-for="Nom" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
 
                     <div class="mt-3 text-center">
                         <p>Déjà inscrit ? <a asp-action="Login" asp-controller="Account">Se connecter</a></p>

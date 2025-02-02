@@ -10,6 +10,7 @@ namespace ForumRecrutementApp.Areas.Recruiter.Controllers
 {
     [Area("Recruiter")]
     [Authorize(Roles = "Recruteur")]
+
     public class RecruteursController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -115,13 +116,36 @@ namespace ForumRecrutementApp.Areas.Recruiter.Controllers
         [HttpPost]
         public async Task<IActionResult> Evaluer(int id, [Bind("Note,Commentaire")] Evaluation evaluation)
         {
+            var user1 = await _userManager.GetUserAsync(User);
+            var recruteur = await _context.Recruteurs
+                .FirstOrDefaultAsync(r => r.IdentityUserId == user1.Id);
+
+            if (recruteur == null)
+            {
+                // Create a new Recruteur record
+                recruteur = new Recruteur
+                {
+                    IdentityUserId = user1.Id,
+                    Nom = user1.UserName, // Or any other required fields
+                    Email = user1.Email
+                };
+
+                _context.Recruteurs.Add(recruteur);
+                await _context.SaveChangesAsync();
+            }
+
+            evaluation.RecruteurId = recruteur.Id;
+            _logger.LogInformation("Evaluer POST action called."); // Add this line
             try
             {
                 if (ModelState.IsValid)
                 {
+                    _logger.LogInformation("ModelState is valid."); // Add this line
                     var user = await _userManager.GetUserAsync(User);
-                    var recruteur = await _context.Recruteurs
-                        .FirstOrDefaultAsync(r => r.IdentityUserId == user.Id);
+                    _logger.LogInformation($"Current user ID: {user.Id}"); // Add this line
+
+                    //var recruteur = await _context.Recruteurs
+                       // .FirstOrDefaultAsync(r => r.IdentityUserId == user.Id);
 
                     if (recruteur == null)
                     {
@@ -130,9 +154,11 @@ namespace ForumRecrutementApp.Areas.Recruiter.Controllers
                         return View(evaluation);
                     }
 
+                    _logger.LogInformation($"Recruteur ID: {recruteur.Id}"); // Add this line
+                    evaluation.RecruteurId = recruteur.Id;
+
                     // Set evaluation properties
                     evaluation.CandidatId = id;
-                    evaluation.RecruteurId = recruteur.Id;
                     evaluation.DateEvaluation = DateTime.Now;
 
                     // Add the evaluation to the database
@@ -142,12 +168,18 @@ namespace ForumRecrutementApp.Areas.Recruiter.Controllers
                     _logger.LogInformation($"Evaluation created for candidate {id} by recruiter {recruteur.Id}");
                     return RedirectToAction(nameof(Index));
                 }
+                else
+                {
+                    _logger.LogWarning("ModelState is invalid: " + string.Join(", ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage))); // Add this line
+                }
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error in Evaluer POST action");
                 ModelState.AddModelError("", "Une erreur s'est produite lors de l'enregistrement de l'évaluation.");
             }
+
+
 
             // If we reach here, something went wrong
             ViewBag.CandidatId = id;

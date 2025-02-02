@@ -1,30 +1,40 @@
-﻿ using ForumRecrutementApp.Data;
+﻿using ForumRecrutementApp.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-namespace ForumRecrutementApp.Areas.Admin.Controllers
+
+[Area("Admin")]
+[Authorize(Roles = "Admin")]
+public class AdministrateursController : Controller
 {
-    [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    private readonly ApplicationDbContext _context;
 
-    public class AdministrateursController : Controller
+    public AdministrateursController(ApplicationDbContext context)
     {
-        private readonly ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public AdministrateursController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+    [HttpGet]
+    public IActionResult Dashboard()
+    {
+        ViewBag.ForumsCount = _context.Forums.Count();
+        ViewBag.CandidatsCount = _context.Candidats.Count();
+        ViewBag.RecruteursCount = _context.Recruteurs.Count();
+        return View();
+    }
 
-        [HttpGet]
-        public IActionResult Dashboard()
-        {
-            var dashboard = new
-            {
-                TotalCandidats = _context.Candidats.Count(),
-                TotalForums = _context.Forums.Count()
-            };
-            return View(dashboard);
-        }
+    [HttpGet]
+
+    public IActionResult Candidats()
+    {
+        var candidats = _context.Candidats.ToList();
+        return View(candidats);
+    }
+
+    [HttpGet]
+
+    public IActionResult Recruteurs()
+    {
+        var recruteurs = _context.Recruteurs.ToList(); // Fetch recruiters
+        return View(recruteurs); // Pass recruiters to the view
     }
 }

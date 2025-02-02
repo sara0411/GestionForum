@@ -1,4 +1,4 @@
-﻿'use strict';
+﻿/*'use strict';
 
 const e = React.createElement;
 
@@ -102,4 +102,4 @@ const LandingPage = () => {
 };
 
 const domContainer = document.querySelector('#react-landing-page');
-ReactDOM.render(e(LandingPage), domContainer);
+ReactDOM.render(e(LandingPage), domContainer);*/

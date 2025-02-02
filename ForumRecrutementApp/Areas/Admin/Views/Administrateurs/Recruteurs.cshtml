@@ -1,0 +1,31 @@
+﻿@model IEnumerable<ForumRecrutementApp.Models.Recruteur>
+@{
+    ViewData["Title"] = "Liste des Recruteurs";
+    Layout = "/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid py-4">
+    <h1 class="mb-4">Liste des Recruteurs</h1>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Email</th>
+                <th>Société</th>
+                <th>Position</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var recruteur in Model)
+            {
+                <tr>
+                    <td>@recruteur.Email</td>
+                    <td>@recruteur.Entreprise</td>
+                    <td>@recruteur.Forum</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-area="Admin" asp-controller="Administrateurs" asp-action="Dashboard" class="btn btn-secondary">
+        Retour au tableau de bord
+    </a>
+</div>

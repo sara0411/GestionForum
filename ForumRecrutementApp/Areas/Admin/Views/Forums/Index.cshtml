@@ -8,7 +8,9 @@
     <h1 class="h3 mb-4">Gestion des Forums</h1>
 
     <p>
-        <a asp-action="Create" class="btn btn-primary">Créer un nouveau forum</a>
+        <a href="/Admin/Forums/Create" class="btn btn-primary">
+            Créer un nouveau forum
+        </a>
     </p>
 
     <div class="card shadow mb-4">
@@ -19,7 +21,7 @@
                         <tr>
                             <th>Nom</th>
                             <th>Date</th>
-                            <th>Lieu</th>
+                            @* <th>Lieu</th> *@
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -29,9 +31,14 @@
                             <tr>
                                 <td>@item.Nom</td>
                                 <td>@item.Date.ToShortDateString()</td>
+                              @*   <td>@item.Lieu</td> *@
                                 <td>
-                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Modifier</a>
-                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Supprimer</a>
+                                    <a href="/Admin/Forums/Edit/1" class="btn btn-warning btn-sm">
+                                        Modifier
+                                    </a>
+                                    <form action="/Admin/Forums/Delete/1" method="post" style="display:inline;">
+                                        <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                                    </form>
                                 </td>
                             </tr>
                         }

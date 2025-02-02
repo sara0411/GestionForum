@@ -7,11 +7,51 @@
     <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/site.css" asp-append-version="true" />
+
+    <style>
+        /* Custom styles for a modern look */
+        .navbar {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+        }
+
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+
+            .nav-link:hover {
+                color: #d1d5db !important;
+            }
+
+        .btn-primary {
+            background-color: #3b82f6;
+            border-color: #3b82f6;
+            transition: background-color 0.3s ease;
+        }
+
+            .btn-primary:hover {
+                background-color: #2563eb;
+                border-color: #2563eb;
+            }
+
+        .footer {
+            background: #1e3a8a;
+            color: white;
+        }
+
+            .footer a {
+                color: #93c5fd;
+            }
+
+                .footer a:hover {
+                    color: #bfdbfe;
+                }
+    </style>
+    @RenderSection("Styles", required: false)
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
-            <div class="container">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="/Admin/Administrateurs/Dashboard">Administration</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
@@ -28,9 +68,10 @@
                             <a class="nav-link" href="/">Retour au site</a>
                         </li> *@
                          <li class="nav-item">
-                               <form asp-controller="Account" asp-action="Logout" asp-area="" method="post" class="form-inline">
-    <button type="submit" class="nav-link btn btn-link text-light">Déconnexion</button>
-</form>
+                            <form action="/Account/Logout" method="post">
+                                @Html.AntiForgeryToken() <!-- Add anti-forgery token -->
+                                <button type="submit" class="nav-link btn btn-link text-dark">Déconnexion</button>
+                            </form>
                             </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -45,15 +86,46 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; @DateTime.Now.Year - Administration Forum Recrutement
+    <footer class="bg-blue-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+                <!-- Column 1: About -->
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-lg font-semibold mb-4">À propos</h3>
+                    <p class="text-sm">ForumRecrutementApp simplifie le processus de recrutement en connectant les talents aux meilleures entreprises.</p>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-lg font-semibold mb-4">Liens rapides</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-sm hover:text-blue-200">Accueil</a></li>
+                        <li><a href="#" class="text-sm hover:text-blue-200">Fonctionnalités</a></li>
+                        <li><a href="#" class="text-sm hover:text-blue-200">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Contact -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="text-sm">Email: <a href="mailto:contact@forumrecrutement.com" class="hover:text-blue-200">contact@forumrecrutement.com</a></li>
+                        <li class="text-sm">Téléphone: +33 123 456 789</li>
+                        <li class="text-sm">Adresse: 123 Rue de Paris, France</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="mt-8 border-t border-blue-700 pt-6 text-center">
+                <p class="text-sm">&copy; @DateTime.Now.Year ForumRecrutementApp. Tous droits réservés.</p>
+            </div>
         </div>
     </footer>
 
-    <script src="/lib/jquery/dist/jquery.min.js"></script>
-    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

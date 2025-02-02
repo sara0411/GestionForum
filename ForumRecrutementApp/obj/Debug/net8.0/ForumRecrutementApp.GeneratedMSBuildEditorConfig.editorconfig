@@ -26,8 +26,16 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\hp\source\repos\GestionForum\ForumRecrutementApp
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/hp/source/repos/GestionForum/ForumRecrutementApp/Areas/Admin/Views/Administrateurs/Candidats.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRtaW5pc3RyYXRldXJzXENhbmRpZGF0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/hp/source/repos/GestionForum/ForumRecrutementApp/Areas/Admin/Views/Administrateurs/Dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRtaW5pc3RyYXRldXJzXERhc2hib2FyZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hp/source/repos/GestionForum/ForumRecrutementApp/Areas/Admin/Views/Administrateurs/Recruteurs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRtaW5pc3RyYXRldXJzXFJlY3J1dGV1cnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/hp/source/repos/GestionForum/ForumRecrutementApp/Areas/Admin/Views/Forums/Create.cshtml]

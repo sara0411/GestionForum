@@ -27,14 +27,8 @@ namespace ForumRecrutementApp.Models
         public IFormFile CVFile { get; set; }
 
         public string CV { get; set; }
-
-        // Foreign key for Forum (nullable)
         public int? ForumId { get; set; }
-
-        // Navigation property for Forum
         public Forum Forum { get; set; }
-
-        // Navigation property for Evaluations
         public ICollection<Evaluation> Evaluations { get; set; } = new List<Evaluation>();
     }
 }

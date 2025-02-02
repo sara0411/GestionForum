@@ -5,16 +5,12 @@
 <!-- Hero Section -->
 <section class="bg-gradient-to-r from-blue-800 to-blue-600 text-white py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-5xl font-bold mb-6">Bienvenue, @User.Identity.Name !</h1>
-        <p class="text-xl mb-8">Gérez vos candidats et vos offres d'emploi en toute simplicité.</p>
-        <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
+        <h1 class="text-5xl font-bold mb-6 animate-fade-in">Bienvenue, @User.Identity.Name !</h1>
+        <p class="text-xl mb-8 animate-fade-in">Gérez vos candidats et vos offres d'emploi en toute simplicité.</p>
+        <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 animate-fade-in-up">
             <a href="@Url.Action("Index", "Candidats", new { area = "Candidate" })"
-               class="bg-white text-blue-600 px-6 py-3 rounded-md font-semibold hover:bg-blue-50 transition duration-300">
+               class="bg-white text-blue-600 px-6 py-3 rounded-md font-semibold hover:bg-blue-50 transition duration-300 transform hover:scale-105">
                 Voir les candidats
-            </a>
-            <a href="@Url.Action("Create", "Offres", new { area = "Recruiter" })"
-               class="bg-transparent border border-white text-white px-6 py-3 rounded-md font-semibold hover:bg-white hover:text-blue-600 transition duration-300">
-                Publier une offre
             </a>
         </div>
     </div>
@@ -23,10 +19,10 @@
 <!-- Dashboard Section -->
 <section id="dashboard" class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-center mb-12">Tableau de bord</h2>
+        <h2 class="text-3xl font-bold text-center mb-12 animate-fade-in">Tableau de bord</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Candidats récents -->
-            <div class="text-center p-6 bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+            <div class="text-center p-6 bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">
                 <div class="flex justify-center">
                     <i class="fas fa-users text-4xl text-blue-600 mb-4"></i>
                 </div>
@@ -38,27 +34,27 @@
                 </a>
             </div>
 
-            <!-- Offres publiées -->
-            <div class="text-center p-6 bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition duration-300">
-                <div class="flex justify-center">
-                    <i class="fas fa-briefcase text-4xl text-blue-600 mb-4"></i>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Offres publiées</h3>
-                <p class="text-gray-600">Gérez vos offres d'emploi et consultez les candidatures.</p>
-                <a href="@Url.Action("Index", "Offres", new { area = "Recruiter" })"
-                   class="mt-4 inline-block text-blue-600 hover:text-blue-700">
-                    Voir plus →
-                </a>
-            </div>
-
             <!-- Statistiques -->
-            <div class="text-center p-6 bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+            <div class="text-center p-6 bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">
                 <div class="flex justify-center">
                     <i class="fas fa-chart-line text-4xl text-blue-600 mb-4"></i>
                 </div>
                 <h3 class="text-xl font-semibold mb-2">Statistiques</h3>
                 <p class="text-gray-600">Suivez les performances de vos offres et candidats.</p>
-                <a href="@Url.Action("Statistics", "Recruteurs", new { area = "Recruiter" })"
+                <a href="@Url.Action("Statistiques", "Recruteurs", new { area = "Recruiter" })"
+                   class="mt-4 inline-block text-blue-600 hover:text-blue-700">
+                    Voir plus →
+                </a>
+            </div>
+
+            <!-- Notifications -->
+            <div class="text-center p-6 bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">
+                <div class="flex justify-center">
+                    <i class="fas fa-bell text-4xl text-blue-600 mb-4"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Notifications</h3>
+                <p class="text-gray-600">Restez informé des dernières activités.</p>
+                <a href="#"
                    class="mt-4 inline-block text-blue-600 hover:text-blue-700">
                     Voir plus →
                 </a>
@@ -70,10 +66,10 @@
 <!-- Call-to-Action Section -->
 <section class="bg-gradient-to-r from-blue-800 to-blue-600 text-white py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl font-bold mb-6">Besoin d'aide ?</h2>
-        <p class="text-xl mb-8">Notre équipe est là pour vous accompagner dans votre processus de recrutement.</p>
+        <h2 class="text-3xl font-bold mb-6 animate-fade-in">Besoin d'aide ?</h2>
+        <p class="text-xl mb-8 animate-fade-in">Notre équipe est là pour vous accompagner dans votre processus de recrutement.</p>
         <a href="@Url.Action("Contact", "Home")"
-           class="bg-white text-blue-600 px-6 py-3 rounded-md font-semibold hover:bg-blue-50 transition duration-300">
+           class="bg-white text-blue-600 px-6 py-3 rounded-md font-semibold hover:bg-blue-50 transition duration-300 transform hover:scale-105">
             Contactez-nous
         </a>
     </div>
@@ -86,3 +82,35 @@
         <p class="mt-2"><a href="#" class="underline hover:text-blue-200">Politique de confidentialité</a></p>
     </div>
 </footer>
+
+<style>
+    .animate-fade-in {
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    .animate-fade-in-up {
+        animation: fadeInUp 1s ease-in-out;
+    }
+
+    @@keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
